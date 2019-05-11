@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Hotels</string>
+
+    <string name="menu_ordered_list">訂單列表</string>
+    <string name="menu_search_available">查詢可訂旅館</string>
+    <string name="menu_new_order">住宿預訂</string>
+    <string name="menu_cancel_order">取消訂單</string>
+    <string name="menu_modify_order">修改訂單</string>
+    <string name="menu_search_order">查詢訂單</string>
+</resources>
