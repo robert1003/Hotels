@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/user_id"/>
+        <EditText
+            android:id="@+id/new_order_user_id"
+            style="@style/InputField"
+            android:inputType="number"/>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/hotel_id"/>
+        <EditText
+            android:id="@+id/new_order_hotel_id"
+            style="@style/InputField"
+            android:inputType="number"/>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/check_in_date"/>
+        <EditText
+            android:id="@+id/new_order_check_in_date"
+            style="@style/InputField"
+            android:hint="@string/date_type"
+            android:inputType="date"/>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/check_out_date"/>
+        <EditText
+            android:id="@+id/new_order_check_out_date"
+            style="@style/InputField"
+            android:hint="@string/date_type"
+            android:inputType="date"/>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/number_of_people"/>
+        <EditText
+            android:id="@+id/new_order_number_of_people"
+            style="@style/InputField"
+            android:inputType="number"/>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/number_of_room"/>
+        <EditText
+            android:id="@+id/new_order_number_of_room"
+            style="@style/InputField"
+            android:inputType="number"/>
+
+        <Button
+            android:id="@+id/modify_order_button"
+            style="@style/ButtonBottom"
+            android:text="@string/modify"/>
+
+    </LinearLayout>
+
+</ScrollView>
