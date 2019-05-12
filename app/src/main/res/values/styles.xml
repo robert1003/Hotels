@@ -45,4 +45,13 @@
         <item name="android:layout_marginBottom">16dp</item>
     </style>
 
+    <style name="TextDialog">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:background">#99A3A4</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

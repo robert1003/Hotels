@@ -27,9 +27,9 @@
             android:inputType="number"/>
 
         <Button
-            android:id="@+id/modify_order_button"
+            android:id="@+id/cancel_order_button"
             style="@style/ButtonBottom"
-            android:text="@string/modify"/>
+            android:text="@string/cancel"/>
 
     </LinearLayout>
 

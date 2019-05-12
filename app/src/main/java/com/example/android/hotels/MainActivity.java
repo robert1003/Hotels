@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         cancelOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cancelOrderIntent = new Intent(MainActivity.this, CancelOrderActivity.class);
+                    Intent cancelOrderIntent = new Intent(MainActivity.this, CancelOrderActivity.class);
                 startActivity(cancelOrderIntent);
             }
         });

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/user_id"/>
+        <EditText
+            android:id="@+id/modify_order_room_user_id"
+            style="@style/InputField"
+            android:inputType="number"/>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/order_id"/>
+        <EditText
+            android:id="@+id/modify_order_room_order_id"
+            style="@style/InputField"
+            android:inputType="number"/>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/room_type"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/single"/>
+            <EditText
+                android:id="@+id/modify_order_room_single"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/dual"/>
+            <EditText
+                android:id="@+id/modify_order_room_dual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/quad"/>
+            <EditText
+                android:id="@+id/modify_order_room_quad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/modify_order_room_button"
+            style="@style/ButtonBottom"
+            android:text="@string/modify"/>
+    </LinearLayout>
+</ScrollView>

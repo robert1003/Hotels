@@ -61,6 +61,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
+        <activity
+            android:name=".activities.ModifyOrderRoomActivity"
+            android:label="@string/modify_order_room"
+            android:parentActivityName=".activities.ModifyOrderActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.ModifyOrderActivity"/>
+        </activity>
+        <activity
+            android:name=".activities.ModifyOrderDateActivity"
+            android:label="@string/modify_order_date"
+            android:parentActivityName=".activities.ModifyOrderActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.ModifyOrderActivity"/>
+        </activity>
     </application>
 
 </manifest>
