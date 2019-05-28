@@ -79,6 +79,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ModifyOrderActivity"/>
         </activity>
+        <provider
+            android:name=".data.OrderProvider"
+            android:authorities="com.example.android.hotels"
+            android:exported="false" />
     </application>
 
 </manifest>
