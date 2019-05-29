@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         // init HotelList
         HotelList.init(this);
 
+        // display database info
+        displayDatabaseInfo();
+
         // click listener on cancel_order
         TextView cancelOrder = (TextView) findViewById(R.id.cancel_order);
         cancelOrder.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent newOrderIntent = new Intent(MainActivity.this, NewOrderActivity.class);
                 startActivity(newOrderIntent);
-                displayDatabaseInfo();
             }
         });
 
@@ -93,7 +95,25 @@ public class MainActivity extends AppCompatActivity {
 // Display the number of rows in the Cursor (which reflects the number of rows in the
 // pets table in the database).
             TextView displayView = (TextView) findViewById(R.id.text_view_order);
-            displayView.setText("Number of rows in Order database table: " + cursor.getCount());
+            String s = "";
+
+            if (cursor.moveToFirst()) {
+                //Loop through the table rows
+                do {
+                    s += cursor.getInt(0) + " ";
+                    s += cursor.getInt(1) + " ";
+                    s += cursor.getString(2) + " ";
+                    s += cursor.getString(3) + " ";
+                    s += cursor.getInt(4) + " ";
+                    s += cursor.getInt(5) + " ";
+                    s += cursor.getInt(6) + " ";
+                    s += cursor.getInt(7) + " ";
+                    s += cursor.getInt(8) + " ";
+                    s += "\n";
+                } while (cursor.moveToNext());
+            }
+
+            displayView.setText(s);
         } finally {
 // Always close the cursor when you're done reading from it. This releases all its
 // resources and makes it invalid.
