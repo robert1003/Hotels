@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
+
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
 public class OrderProvider extends ContentProvider {
@@ -33,6 +35,7 @@ public class OrderProvider extends ContentProvider {
         int match = sUriMather.match(uri);
         switch (match) {
             case ORDERS:
+                Log.i("database", OrderEntry.TABLE_NAME.toString() + " " + projection.toString() + " " + selection.toString() + " " + selectionArgs.toString());
                 cursor = database.query(OrderEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:

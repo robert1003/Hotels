@@ -34,4 +34,10 @@
     <string name="failed_modify_order_id_not_exist">修改失敗，此訂位代號不存在</string>
     <string name="failed_modify_order_date_longer">修改失敗，只能縮短日期，不能延長</string>
     <string name="failed_search_order">您輸入的身份識別碼/訂位代號有誤，請重新輸入</string>
+
+    <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">It\'s a bit lonely here...</string>
+
+    <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
+    <string name="empty_view_subtitle_text">Get started by adding a pet</string>
 </resources>

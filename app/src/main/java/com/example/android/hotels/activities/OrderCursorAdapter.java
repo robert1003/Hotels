@@ -32,7 +32,7 @@ public class OrderCursorAdapter extends CursorAdapter {
         Integer order_id = cursor.getInt(orderIdColumnIndex);
 
 
-        userIdTextView.setText(user_id);
-        orderIdTextView.setText(order_id);
+        userIdTextView.setText(String.valueOf(user_id));
+        orderIdTextView.setText(String.valueOf(order_id));
     }
 }

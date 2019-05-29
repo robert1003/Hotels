@@ -38,23 +38,13 @@ public class SearchOrderActivity extends AppCompatActivity {
         String user_id = mUser_id.getText().toString();
         String order_id = mOrder_id.getText().toString();
 
-        String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
-        String[] selectionArgs = new String[]{user_id, order_id};
-        String[] projection = {
-                OrderEntry.COLUMN_ORDER_ID,
-                OrderEntry.COLUMN_USER_ID,
-                OrderEntry.COLUMN_NUMBER_OF_SINGLE,
-                OrderEntry.COLUMN_NUMBER_OF_DUAL,
-                OrderEntry.COLUMN_NUMBER_OF_QUAD,
-                OrderEntry.COLUMN_CHECK_IN_DATE,
-                OrderEntry.COLUMN_CHECK_OUT_DATE,
-                OrderEntry.COLUMN_TOTAL_PRICE
-        };
-        Cursor cursor = getContentResolver().query(OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
-        Log.v("test", cursor.toString());
-        if(cursor != null){
-
-        }
+        Intent intent = new Intent(SearchOrderActivity.this, SearchListActivity.class);
+        Log.i("fuck", "abcd");
+        intent.putExtra("User_id", user_id);
+        Log.i("fuck", "abcd");
+        intent.putExtra("Order_id", order_id);
+        Log.i("fuck", "abcd");
+        startActivity(intent);
         // try to search order
         /*if(Integer.parseInt(user_id) <= 100) {
             LayoutInflater factory = getLayoutInflater();

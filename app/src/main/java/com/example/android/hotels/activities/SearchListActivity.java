@@ -6,12 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -27,23 +29,33 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list);
-
+        String user_id = getIntent().getStringExtra("User_id");
+        String order_id = getIntent().getStringExtra("Order_id");
         // To access our database, we instantiate our subclass of SQLiteOpenHelper
         // and pass the context, which is the current activity.
 
         ListView OrderListView = (ListView) findViewById(R.id.list);
-
+        //View emptyView = findViewById(R.id.empty_view);
+        //OrderListView.setEmptyView(emptyView);
         //PetCursorAdapter adapter = new PetCursorAdapter(this, cursor);
 
         //petListView.setAdapter(adapter);
-
-        // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
-        //View emptyView = findViewById(R.id.empty_view);
-        //OrderListView.setEmptyView(emptyView);
-
-        mCursorAdapter = new OrderCursorAdapter(this, null);
+        String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
+        String[] selectionArgs = new String[]{user_id, order_id};
+        String[] projection = {
+                OrderEntry.COLUMN_USER_ID,
+                OrderEntry.COLUMN_ORDER_ID
+                //OrderEntry.COLUMN_NUMBER_OF_SINGLE,
+                //OrderEntry.COLUMN_NUMBER_OF_DUAL,
+                //OrderEntry.COLUMN_NUMBER_OF_QUAD,
+                //OrderEntry.COLUMN_CHECK_IN_DATE,
+                //OrderEntry.COLUMN_CHECK_OUT_DATE,
+                //OrderEntry.COLUMN_TOTAL_PRICE
+        };
+        Cursor cursor = getContentResolver().query(OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
+        mCursorAdapter = new OrderCursorAdapter(this, cursor);
         OrderListView.setAdapter(mCursorAdapter);
-        getSupportLoaderManager().initLoader(ORDER_LOADER, null, this);
+        //getSupportLoaderManager().initLoader(ORDER_LOADER, null, this);
         //Setup the item click listener
 
     }

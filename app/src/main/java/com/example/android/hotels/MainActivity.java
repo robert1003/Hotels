@@ -100,15 +100,16 @@ public class MainActivity extends AppCompatActivity {
             if (cursor.moveToFirst()) {
                 //Loop through the table rows
                 do {
-                    s += cursor.getInt(0) + " ";
-                    s += cursor.getInt(1) + " ";
-                    s += cursor.getString(2) + " ";
-                    s += cursor.getString(3) + " ";
-                    s += cursor.getInt(4) + " ";
-                    s += cursor.getInt(5) + " ";
-                    s += cursor.getInt(6) + " ";
-                    s += cursor.getInt(7) + " ";
-                    s += cursor.getInt(8) + " ";
+                    s += cursor.getColumnName(0) + cursor.getInt(0) + " ";
+                    s += cursor.getColumnName(1)+cursor.getInt(1) + " ";
+                    s += cursor.getColumnName(2)+ cursor.getString(2) + " ";
+                    s += cursor.getColumnName(3)+cursor.getString(3) + " ";
+                    s += cursor.getColumnName(4)+cursor.getInt(4) + " ";
+                    s += cursor.getColumnName(5)+cursor.getInt(5) + " ";
+                    s += cursor.getColumnName(6)+cursor.getInt(6) + " ";
+                    s += cursor.getColumnName(7)+cursor.getInt(7) + " ";
+                    s += cursor.getColumnName(8)+cursor.getInt(8) + " ";
+                    //s += cursor.getColumnName(9)+cursor.getInt(9) + " ";
                     s += "\n";
                 } while (cursor.moveToNext());
             }
