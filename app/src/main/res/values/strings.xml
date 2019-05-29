@@ -12,6 +12,7 @@
     <string name="number_of_people">入住人數</string>
     <string name="number_of_room">客房數量</string>
     <string name="total_price">總價</string>
+    <string name="type_of_room">房間型號</string>
     <string name="date_type">DD-MM-YYYY</string>
     <string name="search">查詢</string>
     <string name="sure">確認</string>

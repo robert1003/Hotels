@@ -46,7 +46,7 @@
 
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/number_of_people"/>
+            android:text="@string/type_of_room"/>
         <EditText
             android:id="@+id/new_order_number_of_people"
             style="@style/InputField"

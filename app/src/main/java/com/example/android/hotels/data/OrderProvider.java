@@ -35,30 +35,57 @@ public class OrderProvider extends ContentProvider {
             case ORDERS:
                 cursor = database.query(OrderEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
-            case ORDERS_ID:
-                selection =
+            default:
+                throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
+        cursor.setNotificationUri(getContext().getContentResolver(),uri);
+        return cursor;
     }
 
-    @androidx.annotation.Nullable
     @Override
-    public String getType(@androidx.annotation.NonNull Uri uri) {
-        return null;
-    }
-
-    @androidx.annotation.Nullable
-    @Override
-    public Uri insert(@androidx.annotation.NonNull Uri uri, @androidx.annotation.Nullable ContentValues values) {
+    public String getType(Uri uri) {
         return null;
     }
 
     @Override
-    public int delete(@androidx.annotation.NonNull Uri uri, @androidx.annotation.Nullable String selection, @androidx.annotation.Nullable String[] selectionArgs) {
-        return 0;
+    public Uri insert(Uri uri, ContentValues values) {
+        final int match = sUriMather.match(uri);
+        switch (match){
+            case ORDERS:
+                return insertOrder(uri, values);
+        }
+        return null;
+    }
+    private Uri insertOrder(Uri uri, ContentValues values){
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        long id = database.insert(OrderEntry.TABLE_NAME, null, values);
+        getContext().getContentResolver().notifyChange(uri, null);
+        return ContentUris.withAppendedId(uri, id);
+    }
+
+
+    @Override
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        final int match = sUriMather.match(uri);
+        int rowsDeleted;
+        switch (match) {
+            case ORDERS:
+                // Delete all rows that match the selection and selection args
+                rowsDeleted = database.delete(OrderEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Deletion is not supported for " + uri);
+        }
+        if(rowsDeleted != 0){
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsDeleted;
     }
 
     @Override
-    public int update(@androidx.annotation.NonNull Uri uri, @androidx.annotation.Nullable ContentValues values, @androidx.annotation.Nullable String selection, @androidx.annotation.Nullable String[] selectionArgs) {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         return 0;
     }
 }
