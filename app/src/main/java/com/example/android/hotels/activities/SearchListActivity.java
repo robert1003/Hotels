@@ -37,20 +37,20 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
         ListView OrderListView = (ListView) findViewById(R.id.list);
         //View emptyView = findViewById(R.id.empty_view);
         //OrderListView.setEmptyView(emptyView);
-        //PetCursorAdapter adapter = new PetCursorAdapter(this, cursor);
 
         //petListView.setAdapter(adapter);
         String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
         String[] selectionArgs = new String[]{user_id, order_id};
         String[] projection = {
+                OrderEntry.COLUMN_HOTEL_ID,
                 OrderEntry.COLUMN_USER_ID,
-                OrderEntry.COLUMN_ORDER_ID
-                //OrderEntry.COLUMN_NUMBER_OF_SINGLE,
-                //OrderEntry.COLUMN_NUMBER_OF_DUAL,
-                //OrderEntry.COLUMN_NUMBER_OF_QUAD,
-                //OrderEntry.COLUMN_CHECK_IN_DATE,
-                //OrderEntry.COLUMN_CHECK_OUT_DATE,
-                //OrderEntry.COLUMN_TOTAL_PRICE
+                OrderEntry.COLUMN_ORDER_ID,
+                OrderEntry.COLUMN_NUMBER_OF_SINGLE,
+                OrderEntry.COLUMN_NUMBER_OF_DUAL,
+                OrderEntry.COLUMN_NUMBER_OF_QUAD,
+                OrderEntry.COLUMN_CHECK_IN_DATE,
+                OrderEntry.COLUMN_CHECK_OUT_DATE,
+                OrderEntry.COLUMN_TOTAL_PRICE
         };
         Cursor cursor = getContentResolver().query(OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
         mCursorAdapter = new OrderCursorAdapter(this, cursor);
@@ -62,8 +62,16 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
     @Override
     public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {
         String[] projection = {
+                OrderEntry.COLUMN_HOTEL_ID,
                 OrderEntry.COLUMN_USER_ID,
-                OrderEntry.COLUMN_ORDER_ID };
+                OrderEntry.COLUMN_ORDER_ID,
+                OrderEntry.COLUMN_NUMBER_OF_SINGLE,
+                OrderEntry.COLUMN_NUMBER_OF_DUAL,
+                OrderEntry.COLUMN_NUMBER_OF_QUAD,
+                OrderEntry.COLUMN_CHECK_IN_DATE,
+                OrderEntry.COLUMN_CHECK_OUT_DATE,
+                OrderEntry.COLUMN_TOTAL_PRICE
+        };
         return new CursorLoader(this,
                 OrderEntry.CONTENT_URI,
                 projection,
