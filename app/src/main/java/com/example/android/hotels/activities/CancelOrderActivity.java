@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.android.hotels.R;
-
+import com.example.android.hotels.data.OrderContract.OrderEntry;
 public class CancelOrderActivity extends AppCompatActivity {
     private EditText mUser_id, mOrder_id;
 
@@ -35,7 +35,10 @@ public class CancelOrderActivity extends AppCompatActivity {
         String order_id = mOrder_id.getText().toString();
 
         // try to cancel order (erase order from database) here
-        if(Integer.parseInt(user_id) <= 100) {
+        String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
+        String[] selectionArgs = new String[]{user_id, order_id};
+        int rowsDeleted = getContentResolver().delete(OrderEntry.CONTENT_URI, whereClause, selectionArgs);
+        if(rowsDeleted != 0) {
             Dialog dialog = new Dialog(CancelOrderActivity.this);
             dialog.setContentView(R.layout.success_cancel_order);
             dialog.show();
@@ -44,6 +47,5 @@ public class CancelOrderActivity extends AppCompatActivity {
             dialog.setContentView(R.layout.failed_cancel_order);
             dialog.show();
         }
-
     }
 }

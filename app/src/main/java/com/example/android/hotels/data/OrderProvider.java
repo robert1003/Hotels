@@ -77,7 +77,6 @@ public class OrderProvider extends ContentProvider {
                 // Delete all rows that match the selection and selection args
                 rowsDeleted = database.delete(OrderEntry.TABLE_NAME, selection, selectionArgs);
                 break;
-
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
