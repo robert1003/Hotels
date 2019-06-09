@@ -51,6 +51,9 @@ public class SearchAvailableActivity extends AppCompatActivity {
         try {
             check_in_date = Utils.parseDate(mCheck_in_date.getText().toString());
             check_out_date = Utils.parseDate(mCheck_out_date.getText().toString());
+            number_of_single = Integer.parseInt(mNumber_of_single.getText().toString());
+            number_of_dual = Integer.parseInt(mNumber_of_dual.getText().toString());
+            number_of_quad = Integer.parseInt(mNumber_of_quad.getText().toString());
         } catch(ParseException e) {
             LayoutInflater factory = getLayoutInflater();
             View view = factory.inflate(R.layout.failed_search_available, null);
@@ -61,11 +64,6 @@ public class SearchAvailableActivity extends AppCompatActivity {
             dialog.show();
 
             return;
-        }
-        try {
-            number_of_single = Integer.parseInt(mNumber_of_single.getText().toString());
-            number_of_dual = Integer.parseInt(mNumber_of_dual.getText().toString());
-            number_of_quad = Integer.parseInt(mNumber_of_quad.getText().toString());
         } catch(NumberFormatException e) {
             LayoutInflater factory = getLayoutInflater();
             View view = factory.inflate(R.layout.failed_search_available, null);
@@ -80,7 +78,7 @@ public class SearchAvailableActivity extends AppCompatActivity {
 
         ArrayList<Integer> result = new ArrayList<>();
         for(int i = 0 ; i < HotelList.hotels.size() ; ++i) {
-            int[] occupied_rooms = Utils.getOrdersInATimeRange(i, check_in_date, check_out_date);
+            int[] occupied_rooms = Utils.getOrdersInATimeRange(this, i, check_in_date, check_out_date);
             if((number_of_single + occupied_rooms[0] <= HotelList.hotels.get(i).singleCount) &&
                     (number_of_dual + occupied_rooms[1] <= HotelList.hotels.get(i).dualCount) &&
                     (number_of_quad + occupied_rooms[2] <= HotelList.hotels.get(i).quadCount)) {
