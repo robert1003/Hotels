@@ -44,4 +44,6 @@
 
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a pet</string>
+    <string name="invalid_date_format">失敗：日期格式錯誤</string>
+    <string name="invalid_number_format">失敗：數字格式錯誤</string>
 </resources>
