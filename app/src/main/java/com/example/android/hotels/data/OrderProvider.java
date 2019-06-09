@@ -86,8 +86,52 @@ public class OrderProvider extends ContentProvider {
         return rowsDeleted;
     }
 
+    /**
+     * Update three types of rooms
+     * specified in the selection and selection arguments (which could be 0 or 1 or more rooms).
+     * Return the number of rows that were successfully updated.
+     */
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) throws IllegalArgumentException {
+        if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_SINGLE)) {
+            Integer num_single = values.getAsInteger(OrderEntry.COLUMN_NUMBER_OF_SINGLE);
+            if (num_single == null || num_single < 0) {
+                throw new IllegalArgumentException("Numbers of Singles not valid");
+            }
+        }
+
+        if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_DUAL)) {
+            Integer num_dual = values.getAsInteger(OrderEntry.COLUMN_NUMBER_OF_DUAL);
+            if (num_dual == null || num_dual < 0) {
+                throw new IllegalArgumentException("Numbers of Duals not valid");
+            }
+        }
+
+        if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_QUAD)) {
+            Integer num_quad = values.getAsInteger(OrderEntry.COLUMN_NUMBER_OF_QUAD);
+            if (num_quad == null || num_quad < 0) {
+                throw new IllegalArgumentException("Numbers of Quads not valid");
+            }
+        }
+
+        // If there are no values to update, then don't try to update the database
+        if (values.size() == 0) {
+            return 0;
+        }
+
+        // Otherwise, get writeable database to update the data
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+
+        // Perform the update on the database and get the number of rows affected
+        int rowsUpdated = database.update(OrderEntry.TABLE_NAME, values, selection, selectionArgs);
+
+        // If 1 or more rows were updated, then notify all listeners that the data at the
+        // given URI has changed
+        if (rowsUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        // Return the number of rows updated
+        return rowsUpdated;
     }
 }
