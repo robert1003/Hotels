@@ -20,7 +20,7 @@ public class Utils {
         String whereClause = OrderContract.OrderEntry.COLUMN_HOTEL_ID + " =? AND " +
                 OrderContract.OrderEntry.COLUMN_CHECK_IN_DATE + " <=? AND " +
                 OrderContract.OrderEntry.COLUMN_CHECK_OUT_DATE + " >?";
-        String[] selectionArgs = new String[]{};
+        String[] selectionArgs = new String[]{Integer.toString(hotel_id), Integer.toString(start_date), Integer.toString(end_date)};
         String[] projection = {
                 OrderContract.OrderEntry.COLUMN_NUMBER_OF_SINGLE,
                 OrderContract.OrderEntry.COLUMN_NUMBER_OF_DUAL,
@@ -35,11 +35,11 @@ public class Utils {
                 room_cnt[2] += cursor.getInt(2);
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         whereClause = OrderContract.OrderEntry.COLUMN_HOTEL_ID + " =? AND " +
                 OrderContract.OrderEntry.COLUMN_CHECK_IN_DATE + " <? AND " +
                 OrderContract.OrderEntry.COLUMN_CHECK_OUT_DATE + " >=?";
-        selectionArgs = new String[]{};
         cursor = context.getContentResolver().query(OrderContract.OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
         if (cursor.moveToFirst()) {
             //Loop through the table rows
@@ -49,11 +49,12 @@ public class Utils {
                 room_cnt[2] += cursor.getInt(2);
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         whereClause = OrderContract.OrderEntry.COLUMN_HOTEL_ID + " =? AND " +
                 OrderContract.OrderEntry.COLUMN_CHECK_IN_DATE + " <=? AND " +
                 OrderContract.OrderEntry.COLUMN_CHECK_OUT_DATE + " >=?";
-        selectionArgs = new String[]{};
+        selectionArgs = new String[]{Integer.toString(hotel_id), Integer.toString(start_date), Integer.toString(end_date)};
         cursor = context.getContentResolver().query(OrderContract.OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
         if (cursor.moveToFirst()) {
             //Loop through the table rows
@@ -63,6 +64,7 @@ public class Utils {
                 room_cnt[2] -= cursor.getInt(2);
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         return room_cnt;
     }
