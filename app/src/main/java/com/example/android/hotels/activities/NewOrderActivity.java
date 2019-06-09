@@ -55,47 +55,53 @@ public class NewOrderActivity extends AppCompatActivity {
         String number_of_single = mNumber_of_single.getText().toString();
         String number_of_dual = mNumber_of_dual.getText().toString();
         String number_of_quad = mNumber_of_quad.getText().toString();
-        // try to create new order here
-        ContentValues values = new ContentValues();
-        values.put(OrderEntry.COLUMN_USER_ID, Integer.parseInt(user_id));
-        values.put(OrderEntry.COLUMN_HOTEL_ID, Integer.parseInt(hotel_id));
-        values.put(OrderEntry.COLUMN_CHECK_IN_DATE, Integer.parseInt(check_in_date));
-        values.put(OrderEntry.COLUMN_CHECK_OUT_DATE, Integer.parseInt(check_out_date));
-        values.put(OrderEntry.COLUMN_NUMBER_OF_SINGLE, Integer.parseInt(number_of_single));
-        values.put(OrderEntry.COLUMN_NUMBER_OF_DUAL, Integer.parseInt(number_of_dual));
-        values.put(OrderEntry.COLUMN_NUMBER_OF_QUAD, Integer.parseInt(number_of_quad));
         LayoutInflater factory = getLayoutInflater();
         View view = factory.inflate(R.layout.failed_new_order, null);
         TextView textView = (TextView) view.findViewById(R.id.failed_new_order_text);
-        Integer hotel_index = Integer.parseInt(hotel_id);
-        int total = 0;
+        int check_in = 0, check_out = 0, single = 0, dual = 0, quad = 0, hotel_index = 1600;
         try {
-            int check_in = Utils.parseDate(mCheck_in_date.getText().toString());
-            int check_out = Utils.parseDate(mCheck_out_date.getText().toString());
+            hotel_index = Integer.parseInt(hotel_id);
+            check_in = Utils.parseDate(mCheck_in_date.getText().toString());
+            check_out = Utils.parseDate(mCheck_out_date.getText().toString());
+            single = Integer.parseInt(mNumber_of_single.getText().toString());
+            dual = Integer.parseInt(mNumber_of_dual.getText().toString());
+            quad = Integer.parseInt(mNumber_of_quad.getText().toString());
         } catch(ParseException e) {
             textView.setText(getString(R.string.invalid_date_format));
             ok = false;
+        } catch(NumberFormatException e) {
+            textView.setText(getString(R.string.invalid_number_format));
+            ok = false;
         }
+        int total = 0;
         if(hotel_index >= max_number_of_hotel){
             textView.setText(R.string.failed_hotel_id);
             ok = false;
-        }else{
-            Integer number_single = Integer.parseInt(number_of_single);
-            Integer number_dual = Integer.parseInt(number_of_dual);
-            Integer number_quad = Integer.parseInt(number_of_quad);
+        }else if(ok) {
             int hotel_single = HotelList.hotels.get(hotel_index).singleCount;
             int hotel_dual = HotelList.hotels.get(hotel_index).dualCount;
             int hotel_quad = HotelList.hotels.get(hotel_index).quadCount;
-            if(number_single < hotel_single && number_dual < hotel_dual && number_quad < hotel_quad){
-                total += number_single * HotelList.hotels.get(hotel_index).singlePrice;
-                total += number_dual * HotelList.hotels.get(hotel_index).dualPrice;
-                total += number_quad * HotelList.hotels.get(hotel_index).quadPrice;
+            if(single < hotel_single && dual < hotel_dual && quad < hotel_quad){
+                total += single * HotelList.hotels.get(hotel_index).singlePrice;
+                total += dual * HotelList.hotels.get(hotel_index).dualPrice;
+                total += quad * HotelList.hotels.get(hotel_index).quadPrice;
             }else{
                 textView.setText(R.string.failed_order_room);
                 ok = false;
             }
         }
-        values.put(OrderEntry.COLUMN_TOTAL_PRICE, total);
+        // try to create new order here
+        ContentValues values = new ContentValues();
+        if(ok) {
+            values.put(OrderEntry.COLUMN_USER_ID, Integer.parseInt(user_id));
+            values.put(OrderEntry.COLUMN_HOTEL_ID, Integer.parseInt(hotel_id));
+            values.put(OrderEntry.COLUMN_CHECK_IN_DATE, Integer.toString(check_in));
+            values.put(OrderEntry.COLUMN_CHECK_OUT_DATE, check_out);
+            values.put(OrderEntry.COLUMN_NUMBER_OF_SINGLE, single);
+            values.put(OrderEntry.COLUMN_NUMBER_OF_DUAL, dual);
+            values.put(OrderEntry.COLUMN_NUMBER_OF_QUAD, quad);
+            values.put(OrderEntry.COLUMN_TOTAL_PRICE, total);
+        }
         if(ok){
             Uri newuri = getContentResolver().insert(OrderEntry.CONTENT_URI, values);
             Intent intent = new Intent(NewOrderActivity.this, NewOrderList.class);
@@ -110,8 +116,11 @@ public class NewOrderActivity extends AppCompatActivity {
             startActivity(intent);
             //textView.setText(newuri.getLastPathSegment());
         }
-        Dialog dialog = new Dialog(NewOrderActivity.this);
-        dialog.setContentView(view);
-        dialog.show();
+
+        if(!ok) {
+            Dialog dialog = new Dialog(NewOrderActivity.this);
+            dialog.setContentView(view);
+            dialog.show();
+        }
     }
 }
