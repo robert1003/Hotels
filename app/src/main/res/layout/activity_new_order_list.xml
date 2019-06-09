@@ -9,25 +9,52 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical">
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/order_id"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:id="@+id/new_order_id" />
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/user_id"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:id="@+id/new_user_id" />
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/hotel_id"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:id="@+id/new_hotel_id" />
 
         <TextView
             style="@style/TextAboveInputField"
             android:text="@string/check_in_date"/>
-        <EditText
-            android:id="@+id/search_available_check_in_date"
-            style="@style/InputField"
-            android:hint="@string/date_type"
-            android:inputType="date"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:id="@+id/check_in_date" />
 
         <TextView
             style="@style/TextAboveInputField"
             android:text="@string/check_out_date"/>
-        <EditText
-            android:id="@+id/search_available_check_out_date"
-            style="@style/InputField"
-            android:hint="@string/date_type"
-            android:inputType="date"/>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:id="@+id/check_out_date" />
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/room_type"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,12 +66,11 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/single"/>
-            <EditText
-                android:id="@+id/search_available_room_single"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/number_of_room"/>
+                android:padding="16dp"
+                android:id="@+id/number_of_single"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,12 +83,11 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/dual"/>
-            <EditText
-                android:id="@+id/search_available_room_dual"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/number_of_room"/>
+                android:padding="16dp"
+                android:id="@+id/number_of_dual"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,20 +100,12 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/quad"/>
-            <EditText
-                android:id="@+id/search_available_room_quad"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/number_of_room"/>
+                android:padding="16dp"
+                android:id="@+id/number_of_quad"/>
         </LinearLayout>
-
-
-        <Button
-            android:id="@+id/search_available_button"
-            style="@style/ButtonBottom"
-            android:text="@string/search"/>
-
     </LinearLayout>
 
 </ScrollView>

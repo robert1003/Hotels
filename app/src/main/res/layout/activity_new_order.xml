@@ -46,24 +46,65 @@
 
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/type_of_room"/>
-        <EditText
-            android:id="@+id/new_order_number_of_people"
-            style="@style/InputField"
-            android:inputType="number"/>
+            android:text="@string/room_type"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
 
-        <TextView
-            style="@style/TextAboveInputField"
-            android:text="@string/number_of_room"/>
-        <EditText
-            android:id="@+id/new_order_number_of_room"
-            style="@style/InputField"
-            android:inputType="number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/single"/>
+            <EditText
+                android:id="@+id/new_order_room_single"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/dual"/>
+            <EditText
+                android:id="@+id/new_order_room_dual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/quad"/>
+            <EditText
+                android:id="@+id/new_order_room_quad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
         <Button
             android:id="@+id/new_order_button"
             style="@style/ButtonBottom"
-            android:text="@string/modify"/>
+            android:text="@string/accept"/>
 
     </LinearLayout>
 
