@@ -46,7 +46,8 @@ public class SearchAvailableActivity extends AppCompatActivity {
     }
 
     private void searchOrder() {
-        int check_in_date, check_out_date, number_of_single, number_of_dual, number_of_quad;
+        int number_of_single, number_of_dual, number_of_quad;
+        String check_in_date, check_out_date;
 
         try {
             check_in_date = Utils.parseDate(mCheck_in_date.getText().toString());
@@ -79,6 +80,7 @@ public class SearchAvailableActivity extends AppCompatActivity {
         ArrayList<Integer> result = new ArrayList<>();
         for(int i = 0 ; i < HotelList.hotels.size() ; ++i) {
             int[] occupied_rooms = Utils.getOrdersInATimeRange(this, i, check_in_date, check_out_date);
+            Log.i("hotels", Integer.toString(i) + " " + Integer.toString(occupied_rooms[0]));
             if((number_of_single + occupied_rooms[0] <= HotelList.hotels.get(i).singleCount) &&
                     (number_of_dual + occupied_rooms[1] <= HotelList.hotels.get(i).dualCount) &&
                     (number_of_quad + occupied_rooms[2] <= HotelList.hotels.get(i).quadCount)) {

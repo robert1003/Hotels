@@ -3,11 +3,13 @@ package com.example.android.hotels;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.hotels.activities.CancelOrderActivity;
 import com.example.android.hotels.activities.ModifyOrderActivity;
@@ -20,6 +22,8 @@ import com.example.android.hotels.data.OrderContract.OrderEntry;
 import com.example.android.hotels.data.Hotel;
 import com.example.android.hotels.data.HotelList;
 public class MainActivity extends AppCompatActivity {
+    Handler handler = new Handler();
+    Runnable refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +85,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(searchOrderIntent);
             }
         });
+
+        refresh = new Runnable() {
+            public void run() {
+                // Do something
+                handler.postDelayed(refresh, 1000);
+            }
+        };
+        handler.post(refresh);
     }
+
     private void displayDatabaseInfo() {
 // To access our database, we instantiate our subclass of SQLiteOpenHelper
 // and pass the context, which is the current activity.
@@ -97,19 +110,30 @@ public class MainActivity extends AppCompatActivity {
             TextView displayView = (TextView) findViewById(R.id.text_view_order);
             String s = "";
 
+            s += cursor.getColumnName(0) + " " +
+                    cursor.getColumnName(1) + " " +
+                    cursor.getColumnName(2) + " " +
+                    cursor.getColumnName(3) + " " +
+                    cursor.getColumnName(4) + " " +
+                    cursor.getColumnName(5) + " " +
+                    cursor.getColumnName(6) + " " +
+                    cursor.getColumnName(7) + " " +
+                    cursor.getColumnName(8) + " ";
+            s += "\n";
+
+
             if (cursor.moveToFirst()) {
                 //Loop through the table rows
                 do {
-                    s += cursor.getColumnName(0) + cursor.getInt(0) + " ";
-                    s += cursor.getColumnName(1)+cursor.getInt(1) + " ";
-                    s += cursor.getColumnName(2)+ cursor.getString(2) + " ";
-                    s += cursor.getColumnName(3)+cursor.getString(3) + " ";
-                    s += cursor.getColumnName(4)+cursor.getInt(4) + " ";
-                    s += cursor.getColumnName(5)+cursor.getInt(5) + " ";
-                    s += cursor.getColumnName(6)+cursor.getInt(6) + " ";
-                    s += cursor.getColumnName(7)+cursor.getInt(7) + " ";
-                    s += cursor.getColumnName(8)+cursor.getInt(8) + " ";
-                    //s += cursor.getColumnName(9)+cursor.getInt(9) + " ";
+                    s += cursor.getInt(0) + " ";
+                    s += cursor.getInt(1) + " ";
+                    s += cursor.getString(2) + " ";
+                    s += cursor.getString(3) + " ";
+                    s += cursor.getInt(4) + " ";
+                    s += cursor.getInt(5) + " ";
+                    s += cursor.getString(6) + " ";
+                    s += cursor.getString(7) + " ";
+                    s += cursor.getInt(8) + " ";
                     s += "\n";
                 } while (cursor.moveToNext());
             }

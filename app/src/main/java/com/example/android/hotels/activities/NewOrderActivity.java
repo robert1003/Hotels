@@ -23,8 +23,8 @@ import java.text.ParseException;
 
 public class NewOrderActivity extends AppCompatActivity {
     private EditText mUser_id, mHotel_id, mCheck_in_date, mCheck_out_date, mNumber_of_single, mNumber_of_dual, mNumber_of_quad;
-    private final int max_number_of_hotel = 1500;
-    private  boolean ok = true;
+    private final int max_number_of_hotel = HotelList.hotels.size();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +48,8 @@ public class NewOrderActivity extends AppCompatActivity {
     }
 
     private void newOrder() {
+        boolean ok = true;
+
         String user_id = mUser_id.getText().toString();
         String hotel_id = mHotel_id.getText().toString();
         String check_in_date = mCheck_in_date.getText().toString();
@@ -55,10 +57,12 @@ public class NewOrderActivity extends AppCompatActivity {
         String number_of_single = mNumber_of_single.getText().toString();
         String number_of_dual = mNumber_of_dual.getText().toString();
         String number_of_quad = mNumber_of_quad.getText().toString();
+        String total_price = "";
         LayoutInflater factory = getLayoutInflater();
         View view = factory.inflate(R.layout.failed_new_order, null);
         TextView textView = (TextView) view.findViewById(R.id.failed_new_order_text);
-        int check_in = 0, check_out = 0, single = 0, dual = 0, quad = 0, hotel_index = 1600;
+        String check_in = "", check_out = "";
+        int single = 0, dual = 0, quad = 0, hotel_index = 1600;
         try {
             hotel_index = Integer.parseInt(hotel_id);
             check_in = Utils.parseDate(mCheck_in_date.getText().toString());
@@ -81,7 +85,7 @@ public class NewOrderActivity extends AppCompatActivity {
             int hotel_single = HotelList.hotels.get(hotel_index).singleCount;
             int hotel_dual = HotelList.hotels.get(hotel_index).dualCount;
             int hotel_quad = HotelList.hotels.get(hotel_index).quadCount;
-            if(single < hotel_single && dual < hotel_dual && quad < hotel_quad){
+            if(single <= hotel_single && dual <= hotel_dual && quad <= hotel_quad){
                 total += single * HotelList.hotels.get(hotel_index).singlePrice;
                 total += dual * HotelList.hotels.get(hotel_index).dualPrice;
                 total += quad * HotelList.hotels.get(hotel_index).quadPrice;
@@ -89,13 +93,14 @@ public class NewOrderActivity extends AppCompatActivity {
                 textView.setText(R.string.failed_order_room);
                 ok = false;
             }
+            total_price = Integer.toString(total);
         }
         // try to create new order here
         ContentValues values = new ContentValues();
         if(ok) {
             values.put(OrderEntry.COLUMN_USER_ID, Integer.parseInt(user_id));
             values.put(OrderEntry.COLUMN_HOTEL_ID, Integer.parseInt(hotel_id));
-            values.put(OrderEntry.COLUMN_CHECK_IN_DATE, Integer.toString(check_in));
+            values.put(OrderEntry.COLUMN_CHECK_IN_DATE, check_in);
             values.put(OrderEntry.COLUMN_CHECK_OUT_DATE, check_out);
             values.put(OrderEntry.COLUMN_NUMBER_OF_SINGLE, single);
             values.put(OrderEntry.COLUMN_NUMBER_OF_DUAL, dual);
@@ -113,8 +118,9 @@ public class NewOrderActivity extends AppCompatActivity {
             intent.putExtra("Single", number_of_single);
             intent.putExtra("Dual", number_of_dual);
             intent.putExtra("Quad", number_of_quad);
+            intent.putExtra("Price", total_price);
             startActivity(intent);
-            //textView.setText(newuri.getLastPathSegment());
+            finish();
         }
 
         if(!ok) {

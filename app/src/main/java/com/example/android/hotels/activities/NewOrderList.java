@@ -12,7 +12,7 @@ import com.example.android.hotels.R;
 import org.w3c.dom.Text;
 
 public class NewOrderList extends AppCompatActivity {
-    private TextView mOrder_id, mUser_id, mHotel_id, mCheck_in_date, mCheck_out_date, mNumber_of_single, mNumber_of_dual, mNumber_of_quad;
+    private TextView mOrder_id, mUser_id, mHotel_id, mCheck_in_date, mCheck_out_date, mNumber_of_single, mNumber_of_dual, mNumber_of_quad, mTotal_price;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order_list);
@@ -24,14 +24,16 @@ public class NewOrderList extends AppCompatActivity {
         String single = getIntent().getStringExtra("Single");
         String dual = getIntent().getStringExtra("Dual");
         String quad = getIntent().getStringExtra("Quad");
-        mOrder_id = (TextView) findViewById(R.id.new_order_id);
-        mUser_id = (TextView) findViewById(R.id.new_user_id);
-        mHotel_id = (TextView) findViewById(R.id.new_hotel_id);
-        mCheck_in_date = (TextView) findViewById(R.id.check_in_date);
-        mCheck_out_date = (TextView) findViewById(R.id.check_out_date);
-        mNumber_of_single = (TextView) findViewById(R.id.number_of_single);
-        mNumber_of_dual = (TextView) findViewById(R.id.number_of_dual);
-        mNumber_of_quad = (TextView) findViewById(R.id.number_of_quad);
+        String price = getIntent().getStringExtra("Price");
+        mOrder_id = (TextView) findViewById(R.id.new_order_list_order_id);
+        mUser_id = (TextView) findViewById(R.id.new_order_list_user_id);
+        mHotel_id = (TextView) findViewById(R.id.new_order_list_hotel_id);
+        mCheck_in_date = (TextView) findViewById(R.id.new_order_list_check_in_date);
+        mCheck_out_date = (TextView) findViewById(R.id.new_order_list_check_out_date);
+        mNumber_of_single = (TextView) findViewById(R.id.new_order_list_number_of_single);
+        mNumber_of_dual = (TextView) findViewById(R.id.new_order_list_number_of_dual);
+        mNumber_of_quad = (TextView) findViewById(R.id.new_order_list_number_of_quad);
+        mTotal_price = (TextView) findViewById(R.id.new_order_list_total_price);
         mOrder_id.setText(order_id);
         mUser_id.setText(user_id);
         mHotel_id.setText(hotel_id);
@@ -40,5 +42,6 @@ public class NewOrderList extends AppCompatActivity {
         mNumber_of_single.setText(single);
         mNumber_of_dual.setText(dual);
         mNumber_of_quad.setText(quad);
+        mTotal_price.setText(price);
     }
 }

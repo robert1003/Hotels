@@ -11,11 +11,11 @@
     <string name="check_in_date">入住日期</string>
     <string name="check_out_date">退房日期</string>
     <string name="number_of_people">入住人數</string>
-    <string name="number_of_room">客房數量</string>
+    <string name="number_of_room">客房數量（不需要則需入0）</string>
     <string name="accept">確認</string>
     <string name="total_price">總價</string>
     <string name="type_of_room">房間型號</string>
-    <string name="date_type">DD-MM-YYYY</string>
+    <string name="date_type">YYYY-MM-DD</string>
     <string name="search">查詢</string>
     <string name="sure">確認</string>
     <string name="order">預定</string>

@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_margin="16dp"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_order_id" />
+            android:id="@+id/new_order_list_order_id" />
         <TextView
             style="@style/TextAboveInputField"
             android:text="@string/user_id"/>
@@ -24,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_user_id" />
+            android:id="@+id/new_order_list_user_id" />
 
         <TextView
             style="@style/TextAboveInputField"
@@ -33,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_hotel_id" />
+            android:id="@+id/new_order_list_hotel_id" />
 
         <TextView
             style="@style/TextAboveInputField"
@@ -42,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/check_in_date" />
+            android:id="@+id/new_order_list_check_in_date" />
 
         <TextView
             style="@style/TextAboveInputField"
@@ -51,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/check_out_date" />
+            android:id="@+id/new_order_list_check_out_date" />
         <TextView
             style="@style/TextAboveInputField"
             android:text="@string/room_type"/>
@@ -70,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:id="@+id/number_of_single"/>
+                android:id="@+id/new_order_list_number_of_single"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:id="@+id/number_of_dual"/>
+                android:id="@+id/new_order_list_number_of_dual"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,8 +105,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:id="@+id/number_of_quad"/>
+                android:id="@+id/new_order_list_number_of_quad"/>
         </LinearLayout>
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/total_price"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:id="@+id/new_order_list_total_price" />
     </LinearLayout>
 
 </ScrollView>

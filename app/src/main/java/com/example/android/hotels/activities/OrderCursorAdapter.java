@@ -22,13 +22,13 @@ public class OrderCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView hotelIdTextView = (TextView) view.findViewById(R.id.hotel_id);
-        TextView numberOfSingle = (TextView) view.findViewById(R.id.number_of_single);
-        TextView numberOfDouble = (TextView) view.findViewById(R.id.number_of_double);
-        TextView numberOfQuad = (TextView) view.findViewById(R.id.number_of_quad);
-        TextView checkInDate = (TextView) view.findViewById(R.id.check_in_date);
-        TextView checkOutDate = (TextView) view.findViewById(R.id.check_out_date);
-        TextView totalPrice = (TextView) view.findViewById(R.id.total_price);
+        TextView hotelIdTextView = (TextView) view.findViewById(R.id.new_order_list_hotel_id);
+        TextView numberOfSingle = (TextView) view.findViewById(R.id.new_order_list_number_of_single);
+        TextView numberOfDouble = (TextView) view.findViewById(R.id.new_order_list_number_of_dual);
+        TextView numberOfQuad = (TextView) view.findViewById(R.id.new_order_list_number_of_quad);
+        TextView checkInDate = (TextView) view.findViewById(R.id.new_order_list_check_in_date);
+        TextView checkOutDate = (TextView) view.findViewById(R.id.new_order_list_check_out_date);
+        TextView totalPrice = (TextView) view.findViewById(R.id.new_order_list_total_price);
 
 
         int hotelIdColumnIndex = cursor.getColumnIndex(OrderEntry.COLUMN_HOTEL_ID);
@@ -43,16 +43,16 @@ public class OrderCursorAdapter extends CursorAdapter {
         Integer number_of_single = cursor.getInt(singleColumnIndex);
         Integer number_of_double = cursor.getInt(doubleColumnIndex);
         Integer number_of_quad = cursor.getInt(quadColumnIndex);
-        Integer check_in_date = cursor.getInt(checkInColumnIndex);
-        Integer check_out_date = cursor.getInt(checkOutColumnIndex);
+        String check_in_date = cursor.getString(checkInColumnIndex);
+        String check_out_date = cursor.getString(checkOutColumnIndex);
         Integer total_price = cursor.getInt(totalPriceColumnIndex);
 
         hotelIdTextView.setText(String.valueOf(hotel_id));
         numberOfSingle.setText(String.valueOf(number_of_single));
         numberOfDouble.setText(String.valueOf(number_of_double));
         numberOfQuad.setText(String.valueOf(number_of_quad));
-        checkInDate.setText(String.valueOf(check_in_date));
-        checkOutDate.setText(String.valueOf(check_out_date));
+        checkInDate.setText(check_in_date);
+        checkOutDate.setText(check_out_date);
         totalPrice.setText(String.valueOf(total_price));
     }
 }

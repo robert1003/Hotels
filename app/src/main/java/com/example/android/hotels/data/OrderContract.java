@@ -17,11 +17,8 @@ public final class OrderContract {
         public final static String COLUMN_ORDER_ID = _ID;
         public final static String COLUMN_USER_ID = "user_id";
         public final static String COLUMN_HOTEL_ID = "hotel_id";
-        //public final static String COLUMN_SINGLE = "single";
         public final static String COLUMN_NUMBER_OF_SINGLE = "number_of_single";
-        //public final static String COLUMN_DUAL = "dual";
         public final static String COLUMN_NUMBER_OF_DUAL = "number_of_dual";
-        //public final static String COLUMN_QUAD = "quad";
         public final static String COLUMN_NUMBER_OF_QUAD = "number_of_quad";
         public final static String COLUMN_CHECK_IN_DATE = "check_in_date";
         public final static String COLUMN_CHECK_OUT_DATE = "check_out_date";

@@ -31,14 +31,11 @@ public class OrderDbHelper extends SQLiteOpenHelper {
                 + OrderEntry.COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + OrderEntry.COLUMN_USER_ID + " INTEGER NOT NULL, "
                 + OrderEntry.COLUMN_HOTEL_ID + " INTEGER, "
-                //+ OrderEntry.COLUMN_SINGLE + " INTEGER DEFAULT 0, "
                 + OrderEntry.COLUMN_NUMBER_OF_SINGLE + " INTEGER DEFAULT 0, "
-                //+ OrderEntry.COLUMN_DUAL + " INTEGER DEFAULT 0, "
                 + OrderEntry.COLUMN_NUMBER_OF_DUAL + " INTEGER DEFAULT 0, "
-                //+ OrderEntry.COLUMN_QUAD + " INTEGER DEFAULT 0, "
                 + OrderEntry.COLUMN_NUMBER_OF_QUAD + " INTEGER DEFAULT 0, "
-                + OrderEntry.COLUMN_CHECK_IN_DATE + " INTEGER NOT NULL, "
-                + OrderEntry.COLUMN_CHECK_OUT_DATE + " INTEGER NOT NULL, "
+                + OrderEntry.COLUMN_CHECK_IN_DATE + " TEXT NOT NULL, "
+                + OrderEntry.COLUMN_CHECK_OUT_DATE + " TEXT NOT NULL, "
                 + OrderEntry.COLUMN_TOTAL_PRICE + " INTEGER );";
 
         // Execute the SQL statement
