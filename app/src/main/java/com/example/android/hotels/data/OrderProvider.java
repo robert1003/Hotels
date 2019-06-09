@@ -35,7 +35,6 @@ public class OrderProvider extends ContentProvider {
         int match = sUriMather.match(uri);
         switch (match) {
             case ORDERS:
-                Log.i("database", OrderEntry.TABLE_NAME.toString() + " " + projection.toString() + " " + selection.toString() + " " + selectionArgs.toString());
                 cursor = database.query(OrderEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
