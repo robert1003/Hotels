@@ -4,6 +4,7 @@
     <string name="menu_ordered_list">訂單列表</string>
     <string name="menu_search_available">查詢可訂旅館</string>
     <string name="menu_new_order">住宿預訂</string>
+    <string name="menu_order">訂單</string>
     <string name="menu_cancel_order">取消訂單</string>
     <string name="menu_modify_order">修改訂單</string>
     <string name="menu_search_order">查詢訂單</string>
@@ -11,6 +12,7 @@
     <string name="check_out_date">退房日期</string>
     <string name="number_of_people">入住人數</string>
     <string name="number_of_room">客房數量</string>
+    <string name="accept">確認</string>
     <string name="total_price">總價</string>
     <string name="type_of_room">房間型號</string>
     <string name="date_type">DD-MM-YYYY</string>
@@ -28,6 +30,8 @@
     <string name="quad">四人房</string>
     <string name="success_cancel_order">成功取消訂單</string>
     <string name="failed_cancel_order">失敗：資料不存在</string>
+    <string name="failed_hotel_id">失敗，旅館編號錯誤</string>
+    <string name="failed_order_room">失敗，房間數不足</string>
     <string name="modify_order_room">修改房間數</string>
     <string name="modify_order_date">修改住宿日期</string>
     <string name="failed_modify_order_room_too_many">修改失敗，修改數量超過訂房數量</string>
