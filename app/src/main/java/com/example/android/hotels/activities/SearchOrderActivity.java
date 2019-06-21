@@ -15,8 +15,16 @@ import android.widget.TextView;
 import com.example.android.hotels.R;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 public class SearchOrderActivity extends AppCompatActivity {
+    /**
+     * Variable for user inputs
+     */
     private EditText mUser_id, mOrder_id;
 
+    /**
+     * Initialize the screen
+     *
+     * @param savedInstanceState reload saved instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +42,48 @@ public class SearchOrderActivity extends AppCompatActivity {
         });
     }
 
-    private void searchOrder() {
-        String user_id = mUser_id.getText().toString();
-        String order_id = mOrder_id.getText().toString();
+    /**
+     * Display error message to the user
+     *
+     * @param message the message to show
+     */
+    private void showMessage(String message) {
+        LayoutInflater factory = getLayoutInflater();
+        View view = factory.inflate(R.layout.failed_search_order, null);
+        TextView textView = (TextView) view.findViewById(R.id.failed_search_order_text);
+        textView.setText(message);
+        Dialog dialog = new Dialog(SearchOrderActivity.this);
+        dialog.setContentView(view);
+        dialog.show();
+        return;
+    }
 
+    private void searchOrder() {
+        int user_id, order_id;
+
+        // try to parse userID
+        try {
+            user_id = Integer.parseInt(mUser_id.getText().toString());
+        } catch (NumberFormatException e) {
+            showMessage(getString(R.string.invalid_userID_format));
+            return;
+        }
+
+        // try to parse orderID
+        try {
+            order_id = Integer.parseInt(mOrder_id.getText().toString());
+        } catch (NumberFormatException e) {
+            showMessage(getString(R.string.invalid_orderID_format));
+            return;
+        }
+
+        // check if order is in dataBase
+
+
+        // search order in dataBase
         Intent intent = new Intent(SearchOrderActivity.this, SearchListActivity.class);
-        intent.putExtra("User_id", user_id);
-        intent.putExtra("Order_id", order_id);
+        intent.putExtra("User_id", Integer.toString(user_id));
+        intent.putExtra("Order_id", Integer.toString(order_id));
         startActivity(intent);
     }
 }
