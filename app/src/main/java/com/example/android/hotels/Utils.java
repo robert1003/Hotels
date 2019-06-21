@@ -48,24 +48,33 @@ public class Utils {
         }
     }
 
-    private class Mypair implements Comparable<Mypair> {
-        String first, second;
+    private static class Mytuple implements Comparable<Mytuple> {
+        String date;
+        int id;
+        boolean is_check_in;
 
-        public Mypair(String first, String second) {
-            this.first = first;
-            this.second = second;
+        public Mytuple(String date, int id, boolean is_check_in) {
+            this.date = date;
+            this.id = id;
+            this.is_check_in = is_check_in;
         }
 
         @Override
-        public int compareTo(Mypair p) {
-            int a = first.compareTo(p.first), b = second.compareTo(p.second);
-            if (a < 0) return -1;
-            else if (a == 0) {
-                if (b < 0) return -1;
-                else if (b == 0) return 0;
-                else return 1;
-            }
-            else return 1;
+        public int compareTo(Mytuple p) {
+            return date.compareTo(p.date);
+        }
+    }
+
+    private static class Myclass {
+        String check_in_date, check_out_date;
+        int single, dual, quad;
+
+        public Myclass(String check_in_date, String check_out_date, int single, int dual, int quad) {
+            this.check_in_date = check_in_date;
+            this.check_out_date = check_out_date;
+            this.single = single;
+            this.dual = dual;
+            this.quad = quad;
         }
     }
 
@@ -98,19 +107,36 @@ public class Utils {
                 selectionArgs,
                 null
         );
-        showCursor(cursor);
+        //showCursor(cursor);
 
-        ArrayList<Mypair> segments = new ArrayList<>();
+        ArrayList<Mytuple> segments = new ArrayList<>();
+        ArrayList<Myclass> results = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                segments.add(new Mypair(cursor.getString(3),
-                                cursor.getString(4)));
+                segments.add(new Mytuple(cursor.getString(3), results.size(), true));
+                segments.add(new Mytuple(cursor.getString(4), results.size(), false));
+                results.add(new Myclass(
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2)
+                ));
             } while (cursor.moveToNext());
         }
         Collections.sort(segments);
 
-        for (Pair<String, String> a : segments) {
-            Log.i("arraylistttt", a.first + " " + a.second);
+        int sum0 = 0, sum1 = 0, sum2 = 0, max0 = 0, max1 = 0, max2 = 0;
+        for (Mytuple a : segments) {
+            if (a.is_check_in) {
+                sum0 += results.get(a.id).single;
+                sum1 += results.get(a.id).dual;
+                sum2 += results.get(a.id).quad;
+
+                max0 = max(max0, sum0);
+            } else {
+
+            }
         }
 
 
