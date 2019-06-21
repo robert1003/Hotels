@@ -47,6 +47,7 @@
     <string name="invalid_number_format">失敗：數字格式錯誤</string>
     <string name="invalid_userID_format">失敗：使用者ID格式錯誤</string>
     <string name="invalid_hotelID_format">失敗：旅館ID格式錯誤</string>
+    <string name="invalid_orderID_format">失敗：訂單ID格式錯誤</string>
     <string name="invalid_single_format">失敗：單人房數量格式錯誤</string>
     <string name="invalid_dual_format">失敗：雙人房數量格式錯誤</string>
     <string name="invalid_quad_format">失敗：四人房數量格式錯誤</string>
