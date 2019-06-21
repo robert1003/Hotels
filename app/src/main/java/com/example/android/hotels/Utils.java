@@ -14,9 +14,9 @@ public class Utils {
 
     private Utils() {}
 
-    public static int[] getOrdersInATimeRange(Context context, int hotel_id, String start_date, String end_date) {
+    public static int[] getAvailableRoomInATimeRange(Context context, int hotel_id, String start_date, String end_date) {
         int[] room_cnt = new int[3];
-        room_cnt[0] = room_cnt[1] = room_cnt[2] = 0;
+        room_cnt[0] = room_cnt[1] = room_cnt[2] = 9999;
 
         return room_cnt;
     }

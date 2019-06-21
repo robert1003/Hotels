@@ -30,7 +30,7 @@
     <string name="quad">四人房</string>
     <string name="success_cancel_order">成功取消訂單</string>
     <string name="failed_cancel_order">失敗：資料不存在</string>
-    <string name="failed_hotel_id">失敗，旅館編號錯誤</string>
+    <string name="failed_hotel_id">失敗：旅館編號不存在</string>
     <string name="failed_order_room">失敗，房間數不足</string>
     <string name="modify_order_room">修改房間數</string>
     <string name="modify_order_date">修改住宿日期</string>
@@ -44,6 +44,14 @@
 
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a pet</string>
-    <string name="invalid_date_format">失敗：日期格式錯誤</string>
     <string name="invalid_number_format">失敗：數字格式錯誤</string>
+    <string name="invalid_userID_format">失敗：使用者ID格式錯誤</string>
+    <string name="invalid_hotelID_format">失敗：旅館ID格式錯誤</string>
+    <string name="invalid_single_format">失敗：單人房數量格式錯誤</string>
+    <string name="invalid_dual_format">失敗：雙人房數量格式錯誤</string>
+    <string name="invalid_quad_format">失敗：四人房數量格式錯誤</string>
+    <string name="invalid_date_format">失敗：日期格式錯誤</string>
+    <string name="invalid_date_range">失敗：至少需入住一天</string>
+    <string name="invalid_check_in_date_format">失敗：入住日期格式錯誤</string>
+    <string name="invalid_check_out_date_format">失敗：退房日期格式錯誤</string>
 </resources>
