@@ -167,6 +167,8 @@ public class NewOrderActivity extends AppCompatActivity {
             total_price += single * HotelList.hotels.get(hotel_id).singlePrice;
             total_price += dual * HotelList.hotels.get(hotel_id).dualPrice;
             total_price += quad * HotelList.hotels.get(hotel_id).quadPrice;
+            total_price *= Utils.dateDiff(check_in_date, check_out_date);
+            Log.i("date", Integer.toString(Utils.dateDiff(check_in_date, check_out_date)));
         } else {
             showMessage(getString(R.string.failed_order_room));
             return;

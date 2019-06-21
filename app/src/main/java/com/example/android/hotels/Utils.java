@@ -12,6 +12,9 @@ import com.example.android.hotels.data.OrderContract;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -170,12 +173,20 @@ public class Utils {
     }
 
     public static String parseDate(String raw_date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            formatter.parse(raw_date);
+            new SimpleDateFormat("yyyy-MM-dd").parse(raw_date);
             return raw_date;
         } catch(ParseException e) {
             throw e;
         }
+    }
+
+    public static int dateDiff(String raw_date_1, String raw_date_2) {
+        try {
+            Date d1 = new SimpleDateFormat("yyyy-MM-dd").parse(raw_date_1);
+            Date d2 = new SimpleDateFormat("yyyy-MM-dd").parse(raw_date_2);
+            long diff = d2.getTime() - d1.getTime();
+            return (int) (diff / (1000 * 60 * 60 * 24));
+        } catch(ParseException e) { return 0; }
     }
 }
