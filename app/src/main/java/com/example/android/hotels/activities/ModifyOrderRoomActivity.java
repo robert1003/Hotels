@@ -90,6 +90,9 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
             i_quad = Integer.parseInt(quad);
         values.put(OrderEntry.COLUMN_NUMBER_OF_SINGLE, i_quad);
 
+        //int row = Integer.parseInt(order_id);
+        //cursor.moveToPosition(0);
+        //Log.i("row", Integer.toString(0));
         int hotels_id_column = cursor.getColumnIndex(OrderEntry.COLUMN_HOTEL_ID);
         int hotel_id = cursor.getInt(hotels_id_column);
         int check_in_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_IN_DATE);

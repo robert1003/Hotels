@@ -6,9 +6,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
@@ -16,15 +14,15 @@ public class OrderProvider extends ContentProvider {
 
 
     private OrderDbHelper mDbHelper;
-    private static final UriMatcher sUriMather = new UriMatcher(UriMatcher.NO_MATCH);
+    private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     private static final int ORDERS = 100;
     private static final int ORDERS_ID = 101;
 
     @Override
     public boolean onCreate() {
         mDbHelper = new OrderDbHelper(getContext());
-        sUriMather.addURI(OrderContract.CONTENT_AUTHORITY, "orders", ORDERS);
-        sUriMather.addURI(OrderContract.CONTENT_AUTHORITY, "orders/#", ORDERS_ID);
+        sUriMatcher.addURI(OrderContract.CONTENT_AUTHORITY, "orders", ORDERS);
+        sUriMatcher.addURI(OrderContract.CONTENT_AUTHORITY, "orders/#", ORDERS_ID);
         return true;
     }
 
@@ -32,7 +30,7 @@ public class OrderProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
         Cursor cursor = null;
-        int match = sUriMather.match(uri);
+        int match = sUriMatcher.match(uri);
         switch (match) {
             case ORDERS:
                 cursor = database.query(OrderEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
@@ -51,7 +49,7 @@ public class OrderProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        final int match = sUriMather.match(uri);
+        final int match = sUriMatcher.match(uri);
         switch (match){
             case ORDERS:
                 return insertOrder(uri, values);
@@ -69,7 +67,7 @@ public class OrderProvider extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        final int match = sUriMather.match(uri);
+        final int match = sUriMatcher.match(uri);
         int rowsDeleted;
         switch (match) {
             case ORDERS:
@@ -91,7 +89,25 @@ public class OrderProvider extends ContentProvider {
      * Return the number of rows that were successfully updated.
      */
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) throws IllegalArgumentException {
+    public int update(Uri uri, ContentValues contentValues, String selection,
+                      String[] selectionArgs) {
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case ORDERS:
+                return updateRoom(uri, contentValues, selection, selectionArgs);
+            case ORDERS_ID:
+                // For the PET_ID code, extract out the ID from the URI,
+                // so we know which row to update. Selection will be "_id=?" and selection
+                // arguments will be a String array containing the actual ID.
+                selection = OrderEntry._ID + "=?";
+                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                return updateRoom(uri, contentValues, selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+        }
+    }
+    public int updateRoom(Uri uri, ContentValues values, String selection, String[] selectionArgs) throws IllegalArgumentException {
         if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_SINGLE)) {
             Integer num_single = values.getAsInteger(OrderEntry.COLUMN_NUMBER_OF_SINGLE);
             if (num_single == null || num_single < 0) {
