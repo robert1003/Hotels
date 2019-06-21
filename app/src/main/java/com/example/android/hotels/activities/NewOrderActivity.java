@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -155,7 +156,13 @@ public class NewOrderActivity extends AppCompatActivity {
         // check if rooms are enough; if enough, calculate the price
         int[] available_rooms_count = Utils.getAvailableRoomInATimeRange(this, hotel_id,
                 check_in_date, check_out_date);
-        if (single <= available_rooms_count[0] && dual <= available_rooms_count[1] &&
+        Log.i("available", Integer.toString(available_rooms_count[0]) + " " +
+                Integer.toString(available_rooms_count[1]) + " " +
+                Integer.toString(available_rooms_count[2]));
+        if(single + dual + quad == 0) {
+            showMessage(getString(R.string.invalid_date_range));
+            return;
+        } else if (single <= available_rooms_count[0] && dual <= available_rooms_count[1] &&
                 quad <= available_rooms_count[2]) {
             total_price += single * HotelList.hotels.get(hotel_id).singlePrice;
             total_price += dual * HotelList.hotels.get(hotel_id).dualPrice;
