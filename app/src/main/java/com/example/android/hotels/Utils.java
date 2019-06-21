@@ -6,6 +6,8 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.TextView;
 
+import com.example.android.hotels.data.Hotel;
+import com.example.android.hotels.data.HotelList;
 import com.example.android.hotels.data.OrderContract;
 
 import java.text.ParseException;
@@ -13,6 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.lang.Math;
+
+import static java.lang.Math.max;
 
 public class Utils {
 
@@ -109,6 +114,7 @@ public class Utils {
         );
         //showCursor(cursor);
 
+        Log.i("max", Integer.toString(cursor.getCount()));
         ArrayList<Mytuple> segments = new ArrayList<>();
         ArrayList<Myclass> results = new ArrayList<>();
         if (cursor.moveToFirst()) {
@@ -127,20 +133,38 @@ public class Utils {
         Collections.sort(segments);
 
         int sum0 = 0, sum1 = 0, sum2 = 0, max0 = 0, max1 = 0, max2 = 0;
-        for (Mytuple a : segments) {
-            if (a.is_check_in) {
-                sum0 += results.get(a.id).single;
-                sum1 += results.get(a.id).dual;
-                sum2 += results.get(a.id).quad;
-
-                max0 = max(max0, sum0);
-            } else {
-
+        for (int i = 0 ; i < segments.size() ; ++i) {
+            do {
+                if(segments.get(i).is_check_in) {
+                    Log.i("max", Integer.toString(i) + " " + segments.get(i).date + " in");
+                    sum0 += results.get(segments.get(i).id).single;
+                    sum1 += results.get(segments.get(i).id).dual;
+                    sum2 += results.get(segments.get(i).id).quad;
+                } else {
+                    Log.i("max", Integer.toString(i) + " " + segments.get(i).date + " out");
+                    sum0 -= results.get(segments.get(i).id).single;
+                    sum1 -= results.get(segments.get(i).id).dual;
+                    sum2 -= results.get(segments.get(i).id).quad;
+                }
+                i++;
             }
+            while (i < segments.size() &&
+                    segments.get(i).date.compareTo(segments.get(i - 1).date) == 0);
+            i--;
+
+            max0 = max(max0, sum0);
+            max1 = max(max1, sum1);
+            max2 = max(max2, sum2);
+
+            Log.i("max", Integer.toString(i));
+            Log.i("max", Integer.toString(max0) + " " + Integer.toString(max1) + " " + Integer.toString(max2));
         }
 
+        Log.i("max", Integer.toString(max0) + " " + Integer.toString(max1) + " " + Integer.toString(max2));
 
-        room_cnt[0] = room_cnt[1] = room_cnt[2] = 9999;
+        room_cnt[0] = HotelList.hotels.get(hotel_id).singleCount - max0;
+        room_cnt[1] = HotelList.hotels.get(hotel_id).dualCount - max1;
+        room_cnt[2] = HotelList.hotels.get(hotel_id).quadCount - max2;
 
         return room_cnt;
     }
