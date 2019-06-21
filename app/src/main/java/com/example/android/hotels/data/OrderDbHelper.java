@@ -30,7 +30,7 @@ public class OrderDbHelper extends SQLiteOpenHelper {
         String SQL_CREATE_ORDERS_TABLE =  "CREATE TABLE " + OrderEntry.TABLE_NAME + " ("
                 + OrderEntry.COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + OrderEntry.COLUMN_USER_ID + " INTEGER NOT NULL, "
-                + OrderEntry.COLUMN_HOTEL_ID + " INTEGER, "
+                + OrderEntry.COLUMN_HOTEL_ID + " INTEGER DEFAULT 0, "
                 + OrderEntry.COLUMN_NUMBER_OF_SINGLE + " INTEGER DEFAULT 0, "
                 + OrderEntry.COLUMN_NUMBER_OF_DUAL + " INTEGER DEFAULT 0, "
                 + OrderEntry.COLUMN_NUMBER_OF_QUAD + " INTEGER DEFAULT 0, "

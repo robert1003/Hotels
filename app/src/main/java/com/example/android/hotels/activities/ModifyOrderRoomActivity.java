@@ -69,6 +69,7 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         String quad = mQuad.getText().toString();
         String check_in_date = mCheck_in.getText().toString();
         String check_out_date = mCheck_out.getText().toString();
+        int total_price = 0, hotel_id = 0;
         // try to modify room here
         //SQLiteDatabase db = mDbHelper.getWritableDatabase();
         String selection = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
@@ -76,6 +77,7 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         String[] projection = {
             OrderEntry.COLUMN_USER_ID,
             OrderEntry.COLUMN_ORDER_ID,
+            OrderEntry.COLUMN_HOTEL_ID,
             OrderEntry.COLUMN_CHECK_IN_DATE,
             OrderEntry.COLUMN_CHECK_OUT_DATE,
             OrderEntry.COLUMN_NUMBER_OF_SINGLE,
@@ -116,7 +118,15 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         String old_check_in_date = cursor.getString(check_in_column);
         int check_out_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_OUT_DATE);
         String old_check_out_date = cursor.getString(check_out_column);
-        //Log.i("fuck", quad);
+        int hotel_column = cursor.getColumnIndex(OrderEntry.COLUMN_HOTEL_ID);
+        Log.i("fuck1", String.valueOf(hotel_column));
+        hotel_id = cursor.getInt(hotel_column);
+
+        total_price += i_single * HotelList.hotels.get(hotel_id).singlePrice;
+        total_price += i_double * HotelList.hotels.get(hotel_id).dualPrice;
+        total_price += i_quad * HotelList.hotels.get(hotel_id).quadPrice;
+        total_price *= Utils.dateDiff(check_in_date, check_out_date);
+        Log.i("fuck", String.valueOf(hotel_id));
         if (i_single > old_single || i_double > old_double || i_quad > old_quad) {
             showMessage("Cannot Order More Room");
             return;
@@ -131,6 +141,7 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         }
         values.put(OrderEntry.COLUMN_CHECK_IN_DATE, check_in_date);
         values.put(OrderEntry.COLUMN_CHECK_OUT_DATE, check_out_date);
+        values.put(OrderEntry.COLUMN_TOTAL_PRICE, total_price);
         int rowsUpdated = getContentResolver().update(
                 OrderEntry.CONTENT_URI,
                 values,
