@@ -93,9 +93,9 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         int hotels_id_column = cursor.getColumnIndex(OrderEntry.COLUMN_HOTEL_ID);
         int hotel_id = cursor.getInt(hotels_id_column);
         int check_in_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_IN_DATE);
-        int check_in_date = cursor.getInt(check_in_column);
+        String check_in_date = cursor.getString(check_in_column);
         int check_out_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_OUT_DATE);
-        int check_out_date = cursor.getInt(check_out_column);
+        String check_out_date = cursor.getString(check_out_column);
         int single_column = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_SINGLE);
         int old_single = cursor.getInt(single_column);
         int double_column = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_DUAL);

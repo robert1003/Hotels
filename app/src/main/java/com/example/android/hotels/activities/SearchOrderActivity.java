@@ -39,25 +39,8 @@ public class SearchOrderActivity extends AppCompatActivity {
         String order_id = mOrder_id.getText().toString();
 
         Intent intent = new Intent(SearchOrderActivity.this, SearchListActivity.class);
-        Log.i("fuck", "abcd");
         intent.putExtra("User_id", user_id);
-        Log.i("fuck", "abcd");
         intent.putExtra("Order_id", order_id);
-        Log.i("fuck", "abcd");
         startActivity(intent);
-        // try to search order
-        /*if(Integer.parseInt(user_id) <= 100) {
-            LayoutInflater factory = getLayoutInflater();
-            View view = factory.inflate(R.layout.success_search_order, null);
-            TextView textView = (TextView) view.findViewById(R.id.success_search_order_text);
-            textView.setText("Searchhhhhhhhhh");
-            Dialog dialog = new Dialog(SearchOrderActivity.this);
-            dialog.setContentView(view);
-            dialog.show();
-        } else {
-            Dialog dialog = new Dialog(SearchOrderActivity.this);
-            dialog.setContentView(R.layout.failed_search_order);
-            dialog.show();
-        }*/
     }
 }

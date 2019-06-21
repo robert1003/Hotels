@@ -22,13 +22,13 @@ public class OrderCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView hotelIdTextView = (TextView) view.findViewById(R.id.new_order_list_hotel_id);
-        TextView numberOfSingle = (TextView) view.findViewById(R.id.new_order_list_number_of_single);
-        TextView numberOfDouble = (TextView) view.findViewById(R.id.new_order_list_number_of_dual);
-        TextView numberOfQuad = (TextView) view.findViewById(R.id.new_order_list_number_of_quad);
-        TextView checkInDate = (TextView) view.findViewById(R.id.new_order_list_check_in_date);
-        TextView checkOutDate = (TextView) view.findViewById(R.id.new_order_list_check_out_date);
-        TextView totalPrice = (TextView) view.findViewById(R.id.new_order_list_total_price);
+        TextView hotelIdTextView = (TextView) view.findViewById(R.id.search_list_item_hotel_id);
+        TextView numberOfSingle = (TextView) view.findViewById(R.id.search_list_item_number_of_single);
+        TextView numberOfDouble = (TextView) view.findViewById(R.id.search_list_item_number_of_double);
+        TextView numberOfQuad = (TextView) view.findViewById(R.id.search_list_item_number_of_quad);
+        TextView checkInDate = (TextView) view.findViewById(R.id.search_list_item_check_in_date);
+        TextView checkOutDate = (TextView) view.findViewById(R.id.search_list_item_check_out_date);
+        TextView totalPrice = (TextView) view.findViewById(R.id.search_list_item_total_price);
 
 
         int hotelIdColumnIndex = cursor.getColumnIndex(OrderEntry.COLUMN_HOTEL_ID);
