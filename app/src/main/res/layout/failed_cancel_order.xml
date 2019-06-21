@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/failed_cancel_order_text"
         style="@style/TextDialog"
         android:text="@string/failed_cancel_order" />
 </LinearLayout>

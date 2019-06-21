@@ -106,7 +106,7 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         int quad_column = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_QUAD);
         int old_quad = cursor.getInt(quad_column);
 
-        int[] rooms = Utils.getOrdersInATimeRange(this, hotel_id, check_in_date, check_out_date);
+        int[] rooms = Utils.getAvailableRoomInATimeRange(this, hotel_id, check_in_date, check_out_date);
 
         int temp_single = rooms[0] + (i_single - old_single);
         int temp_double = rooms[0] + (i_double - old_double);

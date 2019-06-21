@@ -26,19 +26,20 @@ import com.example.android.hotels.data.OrderContract.OrderEntry;
 public class SearchListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
     private OrderCursorAdapter mCursorAdapter;
     private static final int ORDER_LOADER = 0;
+
+    /**
+     * Initialize the screen
+     *
+     * @param savedInstanceState reload saved instance
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list);
         String user_id = getIntent().getStringExtra("User_id");
         String order_id = getIntent().getStringExtra("Order_id");
-        // To access our database, we instantiate our subclass of SQLiteOpenHelper
-        // and pass the context, which is the current activity.
 
         ListView OrderListView = (ListView) findViewById(R.id.list);
-        //View emptyView = findViewById(R.id.empty_view);
-        //OrderListView.setEmptyView(emptyView);
 
-        //petListView.setAdapter(adapter);
         String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
         String[] selectionArgs = new String[]{user_id, order_id};
         String[] projection = {
@@ -55,10 +56,8 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
         Cursor cursor = getContentResolver().query(OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
         mCursorAdapter = new OrderCursorAdapter(this, cursor);
         OrderListView.setAdapter(mCursorAdapter);
-        //getSupportLoaderManager().initLoader(ORDER_LOADER, null, this);
-        //Setup the item click listener
-
     }
+
     @Override
     public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {
         String[] projection = {

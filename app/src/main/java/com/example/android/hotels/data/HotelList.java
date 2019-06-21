@@ -17,6 +17,7 @@ import java.util.Date;
 
 public class HotelList {
     public static ArrayList<Hotel> hotels = new ArrayList<>();
+
     private static boolean isInit = false;
 
     // helper function
