@@ -44,6 +44,22 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Display error message to the user
+     *
+     * @param message the message to show
+     */
+    private void showMessage(String message) {
+        LayoutInflater factory = getLayoutInflater();
+        View view = factory.inflate(R.layout.failed_modify_order, null);
+        TextView textView = (TextView) view.findViewById(R.id.failed_modify_order_text);
+        textView.setText(message);
+        Dialog dialog = new Dialog(ModifyOrderRoomActivity.this);
+        dialog.setContentView(view);
+        dialog.show();
+        return;
+    }
+
     private void modifyRoom() {
         String user_id = mUser_id.getText().toString();
         String order_id = mOrder_id.getText().toString();
@@ -67,7 +83,7 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         };
 
         Cursor cursor = getContentResolver().query(OrderEntry.CONTENT_URI, projection, selection, selectionArgs, null);
-
+        cursor.moveToFirst();
         if (cursor.getCount() == 0) {
             Dialog dialog = new Dialog(ModifyOrderRoomActivity.this);
             dialog.setContentView(R.layout.failed_modify_order_id_not_exist);
@@ -90,9 +106,6 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
             i_quad = Integer.parseInt(quad);
         values.put(OrderEntry.COLUMN_NUMBER_OF_SINGLE, i_quad);
 
-        //int row = Integer.parseInt(order_id);
-        //cursor.moveToPosition(0);
-        //Log.i("row", Integer.toString(0));
         int hotels_id_column = cursor.getColumnIndex(OrderEntry.COLUMN_HOTEL_ID);
         int hotel_id = cursor.getInt(hotels_id_column);
         int check_in_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_IN_DATE);
@@ -106,22 +119,11 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         int quad_column = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_QUAD);
         int old_quad = cursor.getInt(quad_column);
 
-        int[] rooms = Utils.getAvailableRoomInATimeRange(this, hotel_id, check_in_date, check_out_date);
-
-        int temp_single = rooms[0] + (i_single - old_single);
-        int temp_double = rooms[0] + (i_double - old_double);
-        int temp_quad = rooms[0] + (i_quad - old_quad);
-
-
-        if (temp_single > HotelList.hotels.get(hotel_id).singleCount ||
-            temp_double > HotelList.hotels.get(hotel_id).dualCount ||
-            temp_quad > HotelList.hotels.get(hotel_id).quadCount) {
-
-            Dialog dialog = new Dialog(ModifyOrderRoomActivity.this);
-            dialog.setContentView(R.layout.failed_modify_order_room_too_many);
-            dialog.show();
+        if (i_single > old_single || i_double > old_single || i_quad > old_quad) {
+            showMessage("Cannot Order More Room");
             return;
         }
+
 
         int rowsUpdated = getContentResolver().update(
                 OrderEntry.CONTENT_URI,
