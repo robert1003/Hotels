@@ -7,6 +7,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
@@ -95,24 +96,18 @@ public class OrderProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case ORDERS:
-                return updateRoom(uri, contentValues, selection, selectionArgs);
-            case ORDERS_ID:
-                // For the PET_ID code, extract out the ID from the URI,
-                // so we know which row to update. Selection will be "_id=?" and selection
-                // arguments will be a String array containing the actual ID.
-                selection = OrderEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                return updateRoom(uri, contentValues, selection, selectionArgs);
+                return database.update(OrderEntry.TABLE_NAME, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
     }
-    public int updateRoom(Uri uri, ContentValues values, String selection, String[] selectionArgs) throws IllegalArgumentException {
+    public int updateAll(Uri uri, ContentValues values, String selection, String[] selectionArgs) throws IllegalArgumentException {
         if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_SINGLE)) {
             Integer num_single = values.getAsInteger(OrderEntry.COLUMN_NUMBER_OF_SINGLE);
             if (num_single == null || num_single < 0) {
                 throw new IllegalArgumentException("Numbers of Singles not valid");
             }
+            Log.i("fuck1", String.valueOf(num_single));
         }
 
         if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_DUAL)) {
@@ -120,6 +115,8 @@ public class OrderProvider extends ContentProvider {
             if (num_dual == null || num_dual < 0) {
                 throw new IllegalArgumentException("Numbers of Duals not valid");
             }
+
+            Log.i("fuck2", String.valueOf(num_dual));
         }
 
         if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_QUAD)) {
@@ -127,6 +124,8 @@ public class OrderProvider extends ContentProvider {
             if (num_quad == null || num_quad < 0) {
                 throw new IllegalArgumentException("Numbers of Quads not valid");
             }
+
+            Log.i("fuck3", String.valueOf(num_quad));
         }
 
         // If there are no values to update, then don't try to update the database

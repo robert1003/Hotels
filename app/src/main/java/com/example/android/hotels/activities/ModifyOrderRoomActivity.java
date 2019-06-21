@@ -22,7 +22,7 @@ import com.example.android.hotels.data.OrderContract.OrderEntry;
 import com.example.android.hotels.data.OrderDbHelper;
 
 public class ModifyOrderRoomActivity extends AppCompatActivity {
-    private EditText mUser_id, mOrder_id, mSingle, mDual, mQuad;
+    private EditText mUser_id, mOrder_id, mSingle, mDual, mQuad, mCheck_in, mCheck_out;
     private OrderDbHelper mDbHelper;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,8 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         mSingle = (EditText) findViewById(R.id.modify_order_room_single);
         mDual = (EditText) findViewById(R.id.modify_order_room_dual);
         mQuad = (EditText) findViewById(R.id.modify_order_room_quad);
-
+        mCheck_in = findViewById(R.id.modify_order_date_check_in_date);
+        mCheck_out = findViewById(R.id.modify_order_date_check_out_date);
         Button button = (Button) findViewById(R.id.modify_order_room_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +67,8 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         String single = mSingle.getText().toString();
         String dual = mDual.getText().toString();
         String quad = mQuad.getText().toString();
-
+        String check_in_date = mCheck_in.getText().toString();
+        String check_out_date = mCheck_out.getText().toString();
         // try to modify room here
         //SQLiteDatabase db = mDbHelper.getWritableDatabase();
         String selection = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
@@ -74,7 +76,6 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         String[] projection = {
             OrderEntry.COLUMN_USER_ID,
             OrderEntry.COLUMN_ORDER_ID,
-            OrderEntry.COLUMN_HOTEL_ID,
             OrderEntry.COLUMN_CHECK_IN_DATE,
             OrderEntry.COLUMN_CHECK_OUT_DATE,
             OrderEntry.COLUMN_NUMBER_OF_SINGLE,
@@ -104,27 +105,32 @@ public class ModifyOrderRoomActivity extends AppCompatActivity {
         int i_quad = 0;
         if (!TextUtils.isEmpty(quad))
             i_quad = Integer.parseInt(quad);
-        values.put(OrderEntry.COLUMN_NUMBER_OF_SINGLE, i_quad);
-
-        int hotels_id_column = cursor.getColumnIndex(OrderEntry.COLUMN_HOTEL_ID);
-        int hotel_id = cursor.getInt(hotels_id_column);
-        int check_in_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_IN_DATE);
-        String check_in_date = cursor.getString(check_in_column);
-        int check_out_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_OUT_DATE);
-        String check_out_date = cursor.getString(check_out_column);
+        values.put(OrderEntry.COLUMN_NUMBER_OF_QUAD, i_quad);
         int single_column = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_SINGLE);
         int old_single = cursor.getInt(single_column);
         int double_column = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_DUAL);
         int old_double = cursor.getInt(double_column);
         int quad_column = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_QUAD);
         int old_quad = cursor.getInt(quad_column);
-
-        if (i_single > old_single || i_double > old_single || i_quad > old_quad) {
+        int check_in_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_IN_DATE);
+        String old_check_in_date = cursor.getString(check_in_column);
+        int check_out_column = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_OUT_DATE);
+        String old_check_out_date = cursor.getString(check_out_column);
+        //Log.i("fuck", quad);
+        if (i_single > old_single || i_double > old_double || i_quad > old_quad) {
             showMessage("Cannot Order More Room");
             return;
         }
-
-
+        if(check_in_date.compareTo(old_check_in_date) < 0 || check_out_date.compareTo(old_check_out_date) > 0){
+            showMessage("fuck");
+            return;
+        }
+        if(check_in_date.compareTo(check_out_date) >= 0){
+            showMessage("fuck");
+            return;
+        }
+        values.put(OrderEntry.COLUMN_CHECK_IN_DATE, check_in_date);
+        values.put(OrderEntry.COLUMN_CHECK_OUT_DATE, check_out_date);
         int rowsUpdated = getContentResolver().update(
                 OrderEntry.CONTENT_URI,
                 values,
