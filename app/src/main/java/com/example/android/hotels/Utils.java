@@ -138,6 +138,7 @@ public class Utils {
         );
         // showCursor(cursor);
 
+        // find the max number of occupied room
         Log.i("max", Integer.toString(cursor.getCount()));
         ArrayList<Mytuple> segments = new ArrayList<>();
         ArrayList<Myclass> results = new ArrayList<>();
