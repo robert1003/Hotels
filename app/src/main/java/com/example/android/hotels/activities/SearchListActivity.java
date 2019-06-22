@@ -1,5 +1,6 @@
 package com.example.android.hotels.activities;
 
+import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,18 +15,37 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import com.example.android.hotels.R;
+import com.example.android.hotels.Utils;
 import com.example.android.hotels.data.OrderContract;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
 public class SearchListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
     private OrderCursorAdapter mCursorAdapter;
     private static final int ORDER_LOADER = 0;
+
+    /**
+     * Display error message to the user
+     *
+     * @param message the message to show
+     */
+    private void showMessage(String message) {
+        LayoutInflater factory = getLayoutInflater();
+        View view = factory.inflate(R.layout.failed_search_order, null);
+        TextView textView = (TextView) view.findViewById(R.id.failed_search_order_text);
+        textView.setText(message);
+        Dialog dialog = new Dialog(SearchListActivity.this);
+        dialog.setContentView(view);
+        dialog.show();
+        return;
+    }
 
     /**
      * Initialize the screen

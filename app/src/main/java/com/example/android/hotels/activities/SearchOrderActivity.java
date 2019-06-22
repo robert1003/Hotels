@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.android.hotels.R;
@@ -83,10 +84,34 @@ public class SearchOrderActivity extends AppCompatActivity {
         // check if order is in dataBase
 
 
+        // description for query.
+        String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
+        String[] selectionArgs = new String[]{String.valueOf(user_id), String.valueOf(order_id)};
+        String[] projection = {
+                OrderEntry.COLUMN_HOTEL_ID,
+                OrderEntry.COLUMN_USER_ID,
+                OrderEntry.COLUMN_ORDER_ID,
+                OrderEntry.COLUMN_NUMBER_OF_SINGLE,
+                OrderEntry.COLUMN_NUMBER_OF_DUAL,
+                OrderEntry.COLUMN_NUMBER_OF_QUAD,
+                OrderEntry.COLUMN_CHECK_IN_DATE,
+                OrderEntry.COLUMN_CHECK_OUT_DATE,
+                OrderEntry.COLUMN_TOTAL_PRICE
+        };
+
+        // the cursor from query
+        Cursor cursor = getContentResolver().query(OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
+        if(cursor.getCount() == 0){
+            showMessage(getString(R.string.failed_search_order));
+            return;
+        }
+
         // search order in dataBase
-        Intent intent = new Intent(SearchOrderActivity.this, SearchListActivity.class);
-        intent.putExtra("User_id", Integer.toString(user_id));
-        intent.putExtra("Order_id", Integer.toString(order_id));
-        startActivity(intent);
+        else {
+            Intent intent = new Intent(SearchOrderActivity.this, SearchListActivity.class);
+            intent.putExtra("User_id", Integer.toString(user_id));
+            intent.putExtra("Order_id", Integer.toString(order_id));
+            startActivity(intent);
+        }
     }
 }
