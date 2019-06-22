@@ -10,6 +10,7 @@ import com.example.android.hotels.data.Hotel;
 import com.example.android.hotels.data.HotelList;
 import com.example.android.hotels.data.OrderContract;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -204,8 +205,12 @@ public class Utils {
     public static String parseDate(String raw_date) throws ParseException {
         try {
             // parse date
-            new SimpleDateFormat("yyyy-MM-dd").parse(raw_date);
-            return raw_date;
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            formatter.setLenient(false);
+            Date date = formatter.parse(raw_date);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String strDate = dateFormat.format(date);
+            return strDate;
         } catch(ParseException e) {
             throw e;
         }
