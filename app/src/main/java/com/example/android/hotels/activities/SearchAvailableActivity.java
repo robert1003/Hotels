@@ -48,14 +48,15 @@ public class SearchAvailableActivity extends AppCompatActivity {
     }
 
     public class Myclass implements Comparable<Myclass> {
-        int single, dual, quad, star, price;
+        int single, dual, quad, star, price, hotel_id;
 
-        public Myclass(int single, int dual, int quad, int star, int price) {
+        public Myclass(int single, int dual, int quad, int star, int price, int hotel_id) {
             this.single = single;
             this.dual = dual;
             this.quad = quad;
             this.star = star;
             this.price = price;
+            this.hotel_id = hotel_id;
         }
 
         @Override
@@ -153,12 +154,12 @@ public class SearchAvailableActivity extends AppCompatActivity {
                 if ((single <= HotelList.hotels.get(i).singleCount) &&
                         (dual <= HotelList.hotels.get(i).dualCount) &&
                         (quad <= HotelList.hotels.get(i).quadCount)) {
-                    result.add(new Myclass(single, dual, quad, HotelList.hotels.get(i).hotelStar, price));
+                    result.add(new Myclass(single, dual, quad, HotelList.hotels.get(i).hotelStar, price, i));
                 }
             } else {
                 int[] available_rooms = Utils.getAvailableRoomInATimeRange(this, i, check_in_date, check_out_date);
                 if ((single <= available_rooms[0]) && (dual <= available_rooms[1]) && (quad <= available_rooms[2])) {
-                    result.add(new Myclass(single, dual, quad, HotelList.hotels.get(i).hotelStar, price));
+                    result.add(new Myclass(single, dual, quad, HotelList.hotels.get(i).hotelStar, price, i));
                 }
             }
         }
