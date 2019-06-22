@@ -59,6 +59,9 @@ public class SearchOrderActivity extends AppCompatActivity {
     }
 
     private void searchOrder() {
+        /**
+         *  Variable for user id and order id
+         */
         int user_id, order_id;
 
         // try to parse userID

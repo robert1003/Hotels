@@ -13,22 +13,35 @@ import com.example.android.hotels.data.OrderContract.OrderEntry;
 
 public class OrderProvider extends ContentProvider {
 
-
+    // variable for database helper
     private OrderDbHelper mDbHelper;
+
+    // variable for uri matcher and match code
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     private static final int ORDERS = 100;
-    private static final int ORDERS_ID = 101;
 
+    // Initialize variable we need
     @Override
     public boolean onCreate() {
         mDbHelper = new OrderDbHelper(getContext());
         sUriMatcher.addURI(OrderContract.CONTENT_AUTHORITY, "orders", ORDERS);
-        sUriMatcher.addURI(OrderContract.CONTENT_AUTHORITY, "orders/#", ORDERS_ID);
         return true;
     }
 
+    /**
+     *
+     * Query from database
+     *
+     * @param uri the uri of table
+     * @param projection the columns we want
+     * @param selection the range of what we confine
+     * @param selectionArgs the arguments of range clause
+     * @param sortOrder the sort order
+     * @return the cursor we query
+     */
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        // variables for database, cursor, and the match code
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
         Cursor cursor = null;
         int match = sUriMatcher.match(uri);
@@ -43,11 +56,19 @@ public class OrderProvider extends ContentProvider {
         return cursor;
     }
 
+    // We didn't use it
     @Override
     public String getType(Uri uri) {
         return null;
     }
 
+    /**
+     * Insert into database
+     *
+     * @param uri the uri of table
+     * @param values what we want to insert
+     * @return a new uri of the row we insert
+     */
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         final int match = sUriMatcher.match(uri);
@@ -57,6 +78,14 @@ public class OrderProvider extends ContentProvider {
         }
         return null;
     }
+
+    /**
+     * the helping method of insertion
+     *
+     * @param uri the uri of table
+     * @param values what we want to insert
+     * @return a new uri of the row we insert
+     */
     private Uri insertOrder(Uri uri, ContentValues values){
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
         long id = database.insert(OrderEntry.TABLE_NAME, null, values);
@@ -64,7 +93,14 @@ public class OrderProvider extends ContentProvider {
         return ContentUris.withAppendedId(uri, id);
     }
 
-
+    /**
+     * Deletion of database
+     *
+     * @param uri the uri of the table
+     * @param selection the range of what we confine
+     * @param selectionArgs the arguments of range clause
+     * @return return the rows being deleted
+     */
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
@@ -85,7 +121,7 @@ public class OrderProvider extends ContentProvider {
     }
 
     /**
-     * Update three types of rooms
+     * Update three types of rooms and the days they stayed
      * specified in the selection and selection arguments (which could be 0 or 1 or more rooms).
      * Return the number of rows that were successfully updated.
      */
@@ -100,52 +136,5 @@ public class OrderProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
-    }
-    public int updateAll(Uri uri, ContentValues values, String selection, String[] selectionArgs) throws IllegalArgumentException {
-        if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_SINGLE)) {
-            Integer num_single = values.getAsInteger(OrderEntry.COLUMN_NUMBER_OF_SINGLE);
-            if (num_single == null || num_single < 0) {
-                throw new IllegalArgumentException("Numbers of Singles not valid");
-            }
-            Log.i("fuck1", String.valueOf(num_single));
-        }
-
-        if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_DUAL)) {
-            Integer num_dual = values.getAsInteger(OrderEntry.COLUMN_NUMBER_OF_DUAL);
-            if (num_dual == null || num_dual < 0) {
-                throw new IllegalArgumentException("Numbers of Duals not valid");
-            }
-
-            Log.i("fuck2", String.valueOf(num_dual));
-        }
-
-        if (values.containsKey(OrderEntry.COLUMN_NUMBER_OF_QUAD)) {
-            Integer num_quad = values.getAsInteger(OrderEntry.COLUMN_NUMBER_OF_QUAD);
-            if (num_quad == null || num_quad < 0) {
-                throw new IllegalArgumentException("Numbers of Quads not valid");
-            }
-
-            Log.i("fuck3", String.valueOf(num_quad));
-        }
-
-        // If there are no values to update, then don't try to update the database
-        if (values.size() == 0) {
-            return 0;
-        }
-
-        // Otherwise, get writeable database to update the data
-        SQLiteDatabase database = mDbHelper.getWritableDatabase();
-
-        // Perform the update on the database and get the number of rows affected
-        int rowsUpdated = database.update(OrderEntry.TABLE_NAME, values, selection, selectionArgs);
-
-        // If 1 or more rows were updated, then notify all listeners that the data at the
-        // given URI has changed
-        if (rowsUpdated != 0) {
-            getContext().getContentResolver().notifyChange(uri, null);
-        }
-
-        // Return the number of rows updated
-        return rowsUpdated;
     }
 }

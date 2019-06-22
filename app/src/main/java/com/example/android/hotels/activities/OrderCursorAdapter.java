@@ -12,16 +12,26 @@ import com.example.android.hotels.R;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 public class OrderCursorAdapter extends CursorAdapter {
 
+    /**
+     *
+     * @param context for the activity it called
+     * @param c cursor for the list view
+     */
     public OrderCursorAdapter(Context context, Cursor c) {
-        super(context, c, 0 /* flags */);
+        super(context, c, 0 );
     }
+
+    // Put cursor into list view
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.search_list_item, parent, false);
     }
 
+    // Bind view with cursor
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+
+        // Variables for text view
         TextView hotelIdTextView = (TextView) view.findViewById(R.id.search_list_item_hotel_id);
         TextView numberOfSingle = (TextView) view.findViewById(R.id.search_list_item_number_of_single);
         TextView numberOfDouble = (TextView) view.findViewById(R.id.search_list_item_number_of_double);
@@ -30,7 +40,7 @@ public class OrderCursorAdapter extends CursorAdapter {
         TextView checkOutDate = (TextView) view.findViewById(R.id.search_list_item_check_out_date);
         TextView totalPrice = (TextView) view.findViewById(R.id.search_list_item_total_price);
 
-
+        // Variables for index of columns
         int hotelIdColumnIndex = cursor.getColumnIndex(OrderEntry.COLUMN_HOTEL_ID);
         int singleColumnIndex = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_SINGLE);
         int doubleColumnIndex = cursor.getColumnIndex(OrderEntry.COLUMN_NUMBER_OF_DUAL);
@@ -39,6 +49,7 @@ public class OrderCursorAdapter extends CursorAdapter {
         int checkOutColumnIndex = cursor.getColumnIndex(OrderEntry.COLUMN_CHECK_OUT_DATE);
         int totalPriceColumnIndex = cursor.getColumnIndex(OrderEntry.COLUMN_TOTAL_PRICE);
 
+        // Variables for content
         Integer hotel_id = cursor.getInt(hotelIdColumnIndex);
         Integer number_of_single = cursor.getInt(singleColumnIndex);
         Integer number_of_double = cursor.getInt(doubleColumnIndex);
@@ -47,6 +58,7 @@ public class OrderCursorAdapter extends CursorAdapter {
         String check_out_date = cursor.getString(checkOutColumnIndex);
         Integer total_price = cursor.getInt(totalPriceColumnIndex);
 
+        // Set text into list
         hotelIdTextView.setText(String.valueOf(hotel_id));
         numberOfSingle.setText(String.valueOf(number_of_single));
         numberOfDouble.setText(String.valueOf(number_of_double));

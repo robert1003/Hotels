@@ -26,6 +26,7 @@ public class Utils {
 
     private Utils() {}
 
+    
     private static void showCursor(Cursor cursor) {
         try {
             String s = "";

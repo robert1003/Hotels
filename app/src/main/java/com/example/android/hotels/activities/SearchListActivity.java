@@ -35,11 +35,15 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list);
+
+        // Get user id and order id from SearchOrderActivity.
         String user_id = getIntent().getStringExtra("User_id");
         String order_id = getIntent().getStringExtra("Order_id");
 
+        // variable for order list.
         ListView OrderListView = (ListView) findViewById(R.id.list);
 
+        // description for query.
         String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
         String[] selectionArgs = new String[]{user_id, order_id};
         String[] projection = {
@@ -53,13 +57,22 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
                 OrderEntry.COLUMN_CHECK_OUT_DATE,
                 OrderEntry.COLUMN_TOTAL_PRICE
         };
+
+        // the cursor from query and set it to the list view
         Cursor cursor = getContentResolver().query(OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
         mCursorAdapter = new OrderCursorAdapter(this, cursor);
         OrderListView.setAdapter(mCursorAdapter);
     }
 
+    /**
+     * Initialize loader
+     *
+     * @param id loader's id
+     * @param bundle for activity's data
+     * @return new cursor loader for
+     */
     @Override
-    public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle bundle) {
         String[] projection = {
                 OrderEntry.COLUMN_HOTEL_ID,
                 OrderEntry.COLUMN_USER_ID,
@@ -79,11 +92,23 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
                 null);
     }
 
+    /**
+     * Finish onload
+     *
+     *
+     * @param loader the loader of cursor
+     * @param cursor new cursor
+     */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
         mCursorAdapter.swapCursor(cursor);
     }
 
+    /**
+     * Reset loader
+     *
+     * @param loader the loader of cursor
+     */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         mCursorAdapter.swapCursor(null);

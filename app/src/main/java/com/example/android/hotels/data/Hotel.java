@@ -1,6 +1,7 @@
 package com.example.android.hotels.data;
 
 public class Hotel {
+    // variables for hotels
     public int hotelID;
     public int hotelStar;
     public String locality;
@@ -12,6 +13,7 @@ public class Hotel {
     public int quadPrice;
     public int quadCount;
 
+    // construct a new hotel
     public Hotel(int hotelID, int hotelStar, String locality, String streetAddress, int singlePrice,
                  int singleCount, int dualPrice, int dualCount, int quadPrice, int quadCount) {
         this.hotelID = hotelID;
@@ -26,6 +28,7 @@ public class Hotel {
         this.quadCount = quadCount;
     }
 
+    // checking function of data
     @Override
     public String toString() {
         return "" + this.hotelID + " " + this.hotelStar + " " + this.locality + " " +

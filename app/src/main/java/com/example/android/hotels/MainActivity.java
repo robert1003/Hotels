@@ -96,17 +96,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayDatabaseInfo() {
-// To access our database, we instantiate our subclass of SQLiteOpenHelper
-// and pass the context, which is the current activity.
+        // To access our database, we instantiate our subclass of SQLiteOpenHelper
+        // and pass the context, which is the current activity.
         OrderDbHelper mDbHelper = new OrderDbHelper(this);
-// Create and/or open a database to read from it
+
+        // Create and/or open a database to read from it
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-// Perform this raw SQL query "SELECT * FROM pets"
-// to get a Cursor that contains all rows from the pets table.
+
+        // Perform this raw SQL query "SELECT * FROM pets"
+        // to get a Cursor that contains all rows from the pets table.
         Cursor cursor = db.rawQuery("SELECT * FROM " + OrderEntry.TABLE_NAME, null);
         try {
-// Display the number of rows in the Cursor (which reflects the number of rows in the
-// pets table in the database).
+
+            // Display the number of rows in the Cursor (which reflects the number of rows in the
+            // pets table in the database).
             TextView displayView = (TextView) findViewById(R.id.text_view_order);
             String s = "";
 
@@ -140,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
             displayView.setText(s);
         } finally {
-// Always close the cursor when you're done reading from it. This releases all its
-// resources and makes it invalid.
+            // Always close the cursor when you're done reading from it. This releases all its
+            // resources and makes it invalid.
             cursor.close();
         }
     }

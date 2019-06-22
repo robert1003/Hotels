@@ -185,7 +185,10 @@ public class NewOrderActivity extends AppCompatActivity {
         values.put(OrderEntry.COLUMN_NUMBER_OF_QUAD, quad);
         values.put(OrderEntry.COLUMN_TOTAL_PRICE, total_price);
 
+        // insert into database
         Uri newuri = getContentResolver().insert(OrderEntry.CONTENT_URI, values);
+
+        // pass variables to next intent
         Intent intent = new Intent(NewOrderActivity.this, NewOrderList.class);
         intent.putExtra("Order_id", newuri.getLastPathSegment());
         intent.putExtra("User_id", Integer.toString(user_id));
