@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.android.hotels.R;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
+
 public class SearchOrderActivity extends AppCompatActivity {
     /** Variable for user inputs */
     private EditText mUser_id, mOrder_id;

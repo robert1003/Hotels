@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-
 import com.example.android.hotels.R;
 import com.example.android.hotels.data.OrderContract;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
