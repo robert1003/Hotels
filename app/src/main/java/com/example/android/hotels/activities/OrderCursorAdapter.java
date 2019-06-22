@@ -14,20 +14,33 @@ public class OrderCursorAdapter extends CursorAdapter {
 
     /**
      *
-     * @param context for the activity it called
+     * @param context for the activity that called this method
      * @param c cursor for the list view
      */
     public OrderCursorAdapter(Context context, Cursor c) {
         super(context, c, 0 );
     }
 
-    // Put cursor into list view
+    /**
+     * Put cursor into list view
+     *
+     * @param context for the activity that called this method
+     * @param cursor cursor for the list view
+     * @param parent the parent viewgroup
+     * @return
+     */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.search_list_item, parent, false);
     }
 
-    // Bind view with cursor
+    /**
+     * Bind view with cursor
+     *
+     * @param view the view to put in
+     * @param context what to put in the view
+     * @param cursor cursor for the list view
+     */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 

@@ -95,7 +95,6 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
     /**
      * Finish onload
      *
-     *
      * @param loader the loader of cursor
      * @param cursor new cursor
      */

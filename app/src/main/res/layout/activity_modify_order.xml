@@ -5,14 +5,115 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/modify_order_room"
-        style="@style/CategoryStyle"
-        android:text="@string/modify_order_room" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/modify_order_date"
-        style="@style/CategoryStyle"
-        android:text="@string/modify_order_date" />
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/user_id"/>
+        <EditText
+            android:id="@+id/modify_order_user_id"
+            style="@style/InputField"
+            android:inputType="number"/>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/order_id"/>
+        <EditText
+            android:id="@+id/modify_order_order_id"
+            style="@style/InputField"
+            android:inputType="number"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                style="@style/TextAboveInputField"
+                android:text="@string/check_in_date"/>
+            <EditText
+                android:id="@+id/modify_order_check_in_date"
+                style="@style/InputField"
+                android:hint="@string/date_type"
+                android:inputType="date"/>
+
+            <TextView
+                style="@style/TextAboveInputField"
+                android:text="@string/check_out_date"/>
+            <EditText
+                android:id="@+id/modify_order_check_out_date"
+                style="@style/InputField"
+                android:hint="@string/date_type"
+                android:inputType="date"/>
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextAboveInputField"
+            android:text="@string/room_type"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/single"/>
+            <EditText
+                android:id="@+id/modify_order_single"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/dual"/>
+            <EditText
+                android:id="@+id/modify_order_dual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/quad"/>
+            <EditText
+                android:id="@+id/modify_order_quad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/number_of_room"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/modify_order_button"
+            style="@style/ButtonBottom"
+            android:text="@string/modify"/>
+    </LinearLayout>
 
 </LinearLayout>

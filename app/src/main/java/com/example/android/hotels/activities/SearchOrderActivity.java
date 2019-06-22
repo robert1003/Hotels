@@ -15,9 +15,7 @@ import android.widget.TextView;
 import com.example.android.hotels.R;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 public class SearchOrderActivity extends AppCompatActivity {
-    /**
-     * Variable for user inputs
-     */
+    /** Variable for user inputs */
     private EditText mUser_id, mOrder_id;
 
     /**
@@ -58,10 +56,11 @@ public class SearchOrderActivity extends AppCompatActivity {
         return;
     }
 
+    /**
+     * Search order
+     */
     private void searchOrder() {
-        /**
-         *  Variable for user id and order id
-         */
+        // Variable for user id and order id
         int user_id, order_id;
 
         // try to parse userID

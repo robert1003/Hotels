@@ -54,4 +54,5 @@
     <string name="invalid_date_range">失敗：至少需入住一天</string>
     <string name="invalid_check_in_date_format">失敗：入住日期格式錯誤</string>
     <string name="invalid_check_out_date_format">失敗：退房日期格式錯誤</string>
+    <string name="success_modify_order">成功修改訂單</string>
 </resources>

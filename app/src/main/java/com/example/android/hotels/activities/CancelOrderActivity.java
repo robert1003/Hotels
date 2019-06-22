@@ -79,25 +79,25 @@ public class CancelOrderActivity extends AppCompatActivity {
         }
 
         // try to cancel order (erase order from database) here
-        String whereClause = OrderEntry.COLUMN_USER_ID
-                + " =? AND "
-                + OrderEntry.COLUMN_ORDER_ID
-                + " =?";
-        String[] selectionArgs = new String[] { Integer.toString(user_id),
-                Integer.toString(order_id) };
+        String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND "
+                + OrderEntry.COLUMN_ORDER_ID + " =?";
+        String[] selectionArgs = new String[] {
+                Integer.toString(user_id),
+                Integer.toString(order_id)
+        };
         int rowsDeleted = getContentResolver().delete(
                 OrderEntry.CONTENT_URI,
                 whereClause,
                 selectionArgs
         );
+
+        // if no rows deleted, this means that this order doesn't exist
         if(rowsDeleted != 0) {
-            Dialog dialog = new Dialog(CancelOrderActivity.this);
-            dialog.setContentView(R.layout.success_cancel_order);
-            dialog.show();
+            showMessage(getString(R.string.success_cancel_order));
+            return;
         } else {
-            Dialog dialog = new Dialog(CancelOrderActivity.this);
-            dialog.setContentView(R.layout.failed_cancel_order);
-            dialog.show();
+            showMessage(getString(R.string.failed_cancel_order));
+            return;
         }
     }
 }
