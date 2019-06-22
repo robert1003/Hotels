@@ -12,50 +12,72 @@
         android:orientation="vertical">
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/order_id"/>
+            android:text="@string/order_id"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_order_list_order_id" />
+            android:id="@+id/new_order_list_order_id"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/user_id"/>
+            android:text="@string/user_id"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_order_list_user_id" />
+            android:id="@+id/new_order_list_user_id"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
 
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/hotel_id"/>
+            android:text="@string/hotel_id"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_order_list_hotel_id" />
+            android:id="@+id/new_order_list_hotel_id"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
 
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/check_in_date"/>
+            android:text="@string/check_in_date"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_order_list_check_in_date" />
+            android:id="@+id/new_order_list_check_in_date"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
 
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/check_out_date"/>
+            android:text="@string/check_out_date"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_order_list_check_out_date" />
+            android:id="@+id/new_order_list_check_out_date"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/room_type"/>
+            android:text="@string/room_type"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,12 +88,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="@string/single"/>
+                android:text="@string/single"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#2B3D4D"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:id="@+id/new_order_list_number_of_single"/>
+                android:id="@+id/new_order_list_number_of_single"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#2B3D4D"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,12 +109,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="@string/dual"/>
+                android:text="@string/dual"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#2B3D4D"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:id="@+id/new_order_list_number_of_dual"/>
+                android:id="@+id/new_order_list_number_of_dual"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#2B3D4D"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,21 +130,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="@string/quad"/>
+                android:text="@string/quad"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#2B3D4D"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:id="@+id/new_order_list_number_of_quad"/>
+                android:id="@+id/new_order_list_number_of_quad"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#2B3D4D"/>
         </LinearLayout>
         <TextView
             style="@style/TextAboveInputField"
-            android:text="@string/total_price"/>
+            android:text="@string/total_price"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:id="@+id/new_order_list_total_price" />
+            android:id="@+id/new_order_list_total_price"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"/>
     </LinearLayout>
 
 </ScrollView>
