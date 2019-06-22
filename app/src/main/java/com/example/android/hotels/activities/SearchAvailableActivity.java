@@ -2,6 +2,7 @@ package com.example.android.hotels.activities;
 
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,35 +46,6 @@ public class SearchAvailableActivity extends AppCompatActivity {
                 searchOrder();
             }
         });
-    }
-
-    public class Myclass implements Comparable<Myclass> {
-        int single, dual, quad, star, price, hotel_id;
-
-        public Myclass(int single, int dual, int quad, int star, int price, int hotel_id) {
-            this.single = single;
-            this.dual = dual;
-            this.quad = quad;
-            this.star = star;
-            this.price = price;
-            this.hotel_id = hotel_id;
-        }
-
-        @Override
-        public int compareTo(Myclass o) {
-            if (star > o.star) return -1;
-            else if (star == o.star) {
-                if (price < o.price) return -1;
-                else if(price == o.price) return 0;
-                else return 1;
-            }
-            else return 1;
-        }
-
-        @Override
-        public String toString() {
-            return Integer.toString(star) + " " + Integer.toString(price);
-        }
     }
 
     /**
@@ -143,7 +115,7 @@ public class SearchAvailableActivity extends AppCompatActivity {
             return;
         }
 
-        ArrayList<Myclass> result = new ArrayList<>();
+        ArrayList<SearchResult> result = new ArrayList<>();
         for(int i = 0 ; i < HotelList.hotels.size() ; ++i) {
             int price = ((single * HotelList.hotels.get(i).singlePrice) +
                     (dual * HotelList.hotels.get(i).dualPrice) +
@@ -153,20 +125,20 @@ public class SearchAvailableActivity extends AppCompatActivity {
                 if ((single <= HotelList.hotels.get(i).singleCount) &&
                         (dual <= HotelList.hotels.get(i).dualCount) &&
                         (quad <= HotelList.hotels.get(i).quadCount)) {
-                    result.add(new Myclass(single, dual, quad, HotelList.hotels.get(i).hotelStar, price, i));
+                    result.add(new SearchResult(HotelList.hotels.get(i).hotelStar, price, i));
                 }
             } else {
                 int[] available_rooms = Utils.getAvailableRoomInATimeRange(this, i, check_in_date, check_out_date);
                 if ((single <= available_rooms[0]) && (dual <= available_rooms[1]) && (quad <= available_rooms[2])) {
-                    result.add(new Myclass(single, dual, quad, HotelList.hotels.get(i).hotelStar, price, i));
+                    result.add(new SearchResult(HotelList.hotels.get(i).hotelStar, price, i));
                 }
             }
         }
         Collections.sort(result);
-        /*
-        for (Myclass a : result) {
-            Log.i("search ava", a.toString());
-        }
-        */
+
+
+        Intent intent = new Intent(SearchAvailableActivity.this, SearchAvailableListActivity.class);
+        intent.putExtra("Hotel_list", result);
+        startActivity(intent);
     }
 }

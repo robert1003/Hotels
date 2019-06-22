@@ -1,32 +1,23 @@
 package com.example.android.hotels.activities;
 
 import android.app.Dialog;
-import android.content.ContentUris;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.android.hotels.R;
-import com.example.android.hotels.Utils;
-import com.example.android.hotels.data.OrderContract;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
-public class SearchListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class SearchOrderListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
     private OrderCursorAdapter mCursorAdapter;
     private static final int ORDER_LOADER = 0;
 
@@ -40,7 +31,7 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
         View view = factory.inflate(R.layout.failed_search_order, null);
         TextView textView = (TextView) view.findViewById(R.id.failed_search_order_text);
         textView.setText(message);
-        Dialog dialog = new Dialog(SearchListActivity.this);
+        Dialog dialog = new Dialog(SearchOrderListActivity.this);
         dialog.setContentView(view);
         dialog.show();
         return;
@@ -53,14 +44,14 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_list);
+        setContentView(R.layout.activity_search_order_list);
 
         // Get user id and order id from SearchOrderActivity.
         String user_id = getIntent().getStringExtra("User_id");
         String order_id = getIntent().getStringExtra("Order_id");
 
         // variable for order list.
-        ListView OrderListView = (ListView) findViewById(R.id.list);
+        ListView OrderListView = (ListView) findViewById(R.id.search_order_list);
 
         // description for query.
         String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";

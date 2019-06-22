@@ -62,6 +62,15 @@
                 android:value=".MainActivity"/>
         </activity>
         <activity
+            android:name=".activities.SearchAvailableListActivity"
+            android:label="@string/search_result"
+            android:parentActivityName=".activities.SearchAvailableActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity
             android:name=".activities.SearchOrderActivity"
             android:label="@string/menu_search_order"
             android:parentActivityName=".MainActivity">
@@ -71,7 +80,7 @@
                 android:value=".MainActivity"/>
         </activity>
         <activity
-            android:name=".activities.SearchListActivity"
+            android:name=".activities.SearchOrderListActivity"
             android:label="@string/menu_search_order"
             android:parentActivityName=".activities.SearchOrderActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->

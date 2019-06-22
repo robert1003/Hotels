@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.android.hotels.R;
@@ -102,7 +100,7 @@ public class SearchOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.failed_search_order));
             return;
         } else {
-            Intent intent = new Intent(SearchOrderActivity.this, SearchListActivity.class);
+            Intent intent = new Intent(SearchOrderActivity.this, SearchOrderListActivity.class);
             intent.putExtra("User_id", Integer.toString(user_id));
             intent.putExtra("Order_id", Integer.toString(order_id));
             startActivity(intent);
