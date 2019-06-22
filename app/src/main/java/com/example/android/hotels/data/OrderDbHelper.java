@@ -26,7 +26,7 @@ public class OrderDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create a String that contains the SQL statement to create the pets table
+        // Create a String that contains the SQL statement to create the orders table
         String SQL_CREATE_ORDERS_TABLE =  "CREATE TABLE " + OrderEntry.TABLE_NAME + " ("
                 + OrderEntry.COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + OrderEntry.COLUMN_USER_ID + " INTEGER NOT NULL, "
