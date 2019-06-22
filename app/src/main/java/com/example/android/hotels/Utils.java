@@ -26,7 +26,11 @@ public class Utils {
 
     private Utils() {}
 
-    
+    /**
+     * a hepler function to use to show context of the query result
+     *
+     * @param cursor the query result
+     */
     private static void showCursor(Cursor cursor) {
         try {
             String s = "";
@@ -57,6 +61,9 @@ public class Utils {
         }
     }
 
+    /**
+     * A helper class
+     */
     private static class Mytuple implements Comparable<Mytuple> {
         String date;
         int id;
@@ -74,6 +81,9 @@ public class Utils {
         }
     }
 
+    /**
+     * A helper class
+     */
     private static class Myclass {
         String check_in_date, check_out_date;
         int single, dual, quad;
@@ -87,16 +97,26 @@ public class Utils {
         }
     }
 
-    public static int[] getAvailableRoomInATimeRange(Context context, int hotel_id, String start_date, String end_date) {
+    /**
+     * Get available rooms in a time range
+     *
+     * @param context the activity that called this method
+     * @param hotel_id which hotel to ask
+     * @param start_date start from
+     * @param end_date end at
+     * @return int array, id 0 for single, id 1 for dual, id 2 for quad
+     */
+    public static int[] getAvailableRoomInATimeRange(Context context, int hotel_id,
+                                                     String start_date, String end_date) {
         int[] room_cnt = new int[3];
         room_cnt[0] = room_cnt[1] = room_cnt[2] = 0;
 
         Log.i("utils", start_date + " " + end_date);
 
+        // get all orders that intersect with this time range
         String whereClause = OrderContract.OrderEntry.COLUMN_HOTEL_ID + " =? AND "
                 + OrderContract.OrderEntry.COLUMN_CHECK_IN_DATE + " <? AND "
                 + OrderContract.OrderEntry.COLUMN_CHECK_OUT_DATE + " >?";
-
         String[] selectionArgs = new String[]{
                 Integer.toString(hotel_id),
                 end_date,
@@ -116,8 +136,9 @@ public class Utils {
                 selectionArgs,
                 null
         );
-        //showCursor(cursor);
+        // showCursor(cursor);
 
+        // find the max number of occupied room
         Log.i("max", Integer.toString(cursor.getCount()));
         ArrayList<Mytuple> segments = new ArrayList<>();
         ArrayList<Myclass> results = new ArrayList<>();
@@ -173,8 +194,16 @@ public class Utils {
         return room_cnt;
     }
 
+    /**
+     * Check if date is valid
+     *
+     * @param raw_date the date to check
+     * @return raw_date, for convenience
+     * @throws ParseException if fail, it will throw exception
+     */
     public static String parseDate(String raw_date) throws ParseException {
         try {
+            // parse date
             new SimpleDateFormat("yyyy-MM-dd").parse(raw_date);
             return raw_date;
         } catch(ParseException e) {
@@ -182,11 +211,23 @@ public class Utils {
         }
     }
 
+    /**
+     * Return raw_date_2 -  raw_date_1
+     *
+     * @param raw_date_1 date first
+     * @param raw_date_2 date second
+     * @return result
+     */
     public static int dateDiff(String raw_date_1, String raw_date_2) {
         try {
+            // parse date
             Date d1 = new SimpleDateFormat("yyyy-MM-dd").parse(raw_date_1);
             Date d2 = new SimpleDateFormat("yyyy-MM-dd").parse(raw_date_2);
+
+            // calculate diff
             long diff = d2.getTime() - d1.getTime();
+
+            // change it into day and return
             return (int) (diff / (1000 * 60 * 60 * 24));
         } catch(ParseException e) { return 0; }
     }

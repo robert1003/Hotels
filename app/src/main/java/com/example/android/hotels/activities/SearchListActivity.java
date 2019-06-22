@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import com.example.android.hotels.R;
 import com.example.android.hotels.Utils;
 import com.example.android.hotels.data.OrderContract;
@@ -114,7 +113,6 @@ public class SearchListActivity extends AppCompatActivity implements LoaderManag
 
     /**
      * Finish onload
-     *
      *
      * @param loader the loader of cursor
      * @param cursor new cursor

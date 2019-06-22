@@ -14,7 +14,8 @@ import org.w3c.dom.Text;
 public class NewOrderList extends AppCompatActivity {
 
     // variables for text view
-    private TextView mOrder_id, mUser_id, mHotel_id, mCheck_in_date, mCheck_out_date, mNumber_of_single, mNumber_of_dual, mNumber_of_quad, mTotal_price;
+    private TextView mOrder_id, mUser_id, mHotel_id, mCheck_in_date, mCheck_out_date,
+            mNumber_of_single, mNumber_of_dual, mNumber_of_quad, mTotal_price;
 
     /**
      *
