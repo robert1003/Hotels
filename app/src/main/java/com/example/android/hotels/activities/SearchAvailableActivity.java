@@ -145,7 +145,6 @@ public class SearchAvailableActivity extends AppCompatActivity {
 
         ArrayList<Myclass> result = new ArrayList<>();
         for(int i = 0 ; i < HotelList.hotels.size() ; ++i) {
-            Log.i("running", Integer.toString(i));
             int price = ((single * HotelList.hotels.get(i).singlePrice) +
                     (dual * HotelList.hotels.get(i).dualPrice) +
                     (quad * HotelList.hotels.get(i).quadPrice)) * Utils.dateDiff(check_in_date, check_out_date);
@@ -164,9 +163,10 @@ public class SearchAvailableActivity extends AppCompatActivity {
             }
         }
         Collections.sort(result);
-
+        /*
         for (Myclass a : result) {
             Log.i("search ava", a.toString());
         }
+        */
     }
 }
