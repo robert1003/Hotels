@@ -57,4 +57,6 @@
     <string name="success_modify_order">成功修改訂單</string>
     <string name="star">星級</string>
     <string name="search_result">查詢結果</string>
+    <string name="invalid_room_numbers">失敗：房間數總合要大於一</string>
+    <string name="no_available_rooms">查無結果</string>
 </resources>

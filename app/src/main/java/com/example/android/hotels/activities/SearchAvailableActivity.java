@@ -25,9 +25,15 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class SearchAvailableActivity extends AppCompatActivity {
+    /** Variable for user inputs */
     private EditText mCheck_in_date, mCheck_out_date, mNumber_of_single,
             mNumber_of_dual, mNumber_of_quad;
 
+    /**
+     * Initialize the screen
+     *
+     * @param savedInstanceState reload saved instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +70,14 @@ public class SearchAvailableActivity extends AppCompatActivity {
         return;
     }
 
+    /**
+     * Search available orders
+     */
     private void searchOrder() {
-
         int single, dual, quad;
         String check_in_date = "", check_out_date = "";
 
+        // parse user inputs
         // try to parse check_in_date
         try {
             check_in_date = Utils.parseDate(mCheck_in_date.getText().toString());
@@ -76,7 +85,6 @@ public class SearchAvailableActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_check_in_date_format));
             return;
         }
-
         // try to parse check_out_date
         try {
             check_out_date = Utils.parseDate(mCheck_out_date.getText().toString());
@@ -84,7 +92,6 @@ public class SearchAvailableActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_check_out_date_format));
             return;
         }
-
         // try to parse number_of_single
         try {
             single = Integer.parseInt(mNumber_of_single.getText().toString());
@@ -92,7 +99,6 @@ public class SearchAvailableActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_single_format));
             return;
         }
-
         // try to parse number_of_double
         try {
             dual = Integer.parseInt(mNumber_of_dual.getText().toString());
@@ -100,7 +106,6 @@ public class SearchAvailableActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_dual_format));
             return;
         }
-
         // try to parse number_of_quad
         try {
             quad = Integer.parseInt(mNumber_of_quad.getText().toString());
@@ -109,12 +114,19 @@ public class SearchAvailableActivity extends AppCompatActivity {
             return;
         }
 
+        // check validness
         // check the validness of two dates (check_in_date < check_out_date)
         if (check_in_date.compareTo(check_out_date) >= 0) {
             showMessage(getString(R.string.invalid_date_range));
             return;
         }
+        // check the validness of rooms
+        if(single + dual + quad == 0) {
+            showMessage(getString(R.string.invalid_room_numbers));
+            return;
+        }
 
+        // get all results and put it into result
         ArrayList<SearchResult> result = new ArrayList<>();
         for(int i = 0 ; i < HotelList.hotels.size() ; ++i) {
             int price = ((single * HotelList.hotels.get(i).singlePrice) +
@@ -136,7 +148,13 @@ public class SearchAvailableActivity extends AppCompatActivity {
         }
         Collections.sort(result);
 
+        // if no result
+        if (result.size() == 0) {
+            showMessage(getString(R.string.no_available_rooms));
+            return;
+        }
 
+        // pass the result to SearchAvailableActivity
         Intent intent = new Intent(SearchAvailableActivity.this, SearchAvailableListActivity.class);
         intent.putExtra("Hotel_list", result);
         startActivity(intent);

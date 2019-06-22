@@ -29,10 +29,5 @@
         android:id="@+id/search_order"
         style="@style/CategoryStyle"
         android:text="@string/menu_search_order" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_view_order"
-        android:text="Here"/>
 
 </LinearLayout>

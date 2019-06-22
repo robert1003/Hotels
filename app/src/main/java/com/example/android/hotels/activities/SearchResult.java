@@ -2,6 +2,9 @@ package com.example.android.hotels.activities;
 
 import java.io.Serializable;
 
+/**
+ * Store a search result
+ */
 public class SearchResult implements Comparable<SearchResult>, Serializable {
     private int star, price, hotel_id;
 

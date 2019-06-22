@@ -11,14 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.android.hotels.R;
-import com.example.android.hotels.data.Hotel;
 import com.example.android.hotels.data.HotelList;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
 public class CancelOrderActivity extends AppCompatActivity {
-    /**
-     * Variable for user inputs
-     */
+    /** Variable for user inputs */
     private EditText mUser_id, mOrder_id;
 
     /**
@@ -65,6 +62,7 @@ public class CancelOrderActivity extends AppCompatActivity {
     private void cancelOrder() {
         int user_id, order_id, hotel_id;
 
+        // parse user inputs
         // try to parse userID
         try {
             user_id = Integer.parseInt(mUser_id.getText().toString());
@@ -72,7 +70,6 @@ public class CancelOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_userID_format));
             return;
         }
-
         // try to parse orderID
         try {
             order_id = Integer.parseInt(mOrder_id.getText().toString());

@@ -23,8 +23,12 @@ import com.example.android.hotels.data.Hotel;
 import com.example.android.hotels.data.HotelList;
 public class MainActivity extends AppCompatActivity {
     Handler handler = new Handler();
-    Runnable refresh;
 
+    /**
+     * Initialize the screen
+     *
+     * @param savedInstanceState reload saved instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         // init HotelList
         HotelList.init(this);
-
-        // display database info
-        displayDatabaseInfo();
 
         // click listener on cancel_order
         TextView cancelOrder = (TextView) findViewById(R.id.cancel_order);
@@ -85,67 +86,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(searchOrderIntent);
             }
         });
-
-        refresh = new Runnable() {
-            public void run() {
-                // Do something
-                handler.postDelayed(refresh, 1000);
-            }
-        };
-        handler.post(refresh);
-    }
-
-    private void displayDatabaseInfo() {
-        // To access our database, we instantiate our subclass of SQLiteOpenHelper
-        // and pass the context, which is the current activity.
-        OrderDbHelper mDbHelper = new OrderDbHelper(this);
-
-        // Create and/or open a database to read from it
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-        // Perform this raw SQL query "SELECT * FROM pets"
-        // to get a Cursor that contains all rows from the pets table.
-        Cursor cursor = db.rawQuery("SELECT * FROM " + OrderEntry.TABLE_NAME, null);
-        try {
-
-            // Display the number of rows in the Cursor (which reflects the number of rows in the
-            // pets table in the database).
-            TextView displayView = (TextView) findViewById(R.id.text_view_order);
-            String s = "";
-
-            s += cursor.getColumnName(0) + " " +
-                    cursor.getColumnName(1) + " " +
-                    cursor.getColumnName(2) + " " +
-                    cursor.getColumnName(3) + " " +
-                    cursor.getColumnName(4) + " " +
-                    cursor.getColumnName(5) + " " +
-                    cursor.getColumnName(6) + " " +
-                    cursor.getColumnName(7) + " " +
-                    cursor.getColumnName(8) + " ";
-            s += "\n";
-
-
-            if (cursor.moveToFirst()) {
-                //Loop through the table rows
-                do {
-                    s += cursor.getInt(0) + " ";
-                    s += cursor.getInt(1) + " ";
-                    s += cursor.getString(2) + " ";
-                    s += cursor.getString(3) + " ";
-                    s += cursor.getInt(4) + " ";
-                    s += cursor.getInt(5) + " ";
-                    s += cursor.getString(6) + " ";
-                    s += cursor.getString(7) + " ";
-                    s += cursor.getInt(8) + " ";
-                    s += "\n";
-                } while (cursor.moveToNext());
-            }
-
-            displayView.setText(s);
-        } finally {
-            // Always close the cursor when you're done reading from it. This releases all its
-            // resources and makes it invalid.
-            cursor.close();
-        }
     }
 }

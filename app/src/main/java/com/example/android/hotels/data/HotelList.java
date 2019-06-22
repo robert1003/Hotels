@@ -1,8 +1,13 @@
 package com.example.android.hotels.data;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.renderscript.ScriptC;
 import android.util.Log;
+import android.widget.TextView;
+
+import com.example.android.hotels.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +41,28 @@ public class HotelList {
         }
         return json;
     }
+
+    private static int orderCount(Context context, int hotelID) {
+        String whereClause = OrderContract.OrderEntry.COLUMN_HOTEL_ID + " =?";
+        String[] selectionArgs = new String[]{
+                String.valueOf(hotelID)
+        };
+        String[] projection = {
+                OrderContract.OrderEntry.COLUMN_ORDER_ID,
+        };
+
+        // the cursor from query
+        Cursor cursor = context.getContentResolver().query(
+                OrderContract.OrderEntry.CONTENT_URI,
+                projection,
+                whereClause,
+                selectionArgs,
+                null
+        );
+
+        return cursor.getCount();
+    }
+
     // init hotels
     public static void init(Context context) {
         if(isInit) return;
@@ -56,15 +83,14 @@ public class HotelList {
                 int quadPrice = Integer.parseInt(roomArray.getJSONObject(2).getString("RoomPrice"));
                 int quadCount = Integer.parseInt(roomArray.getJSONObject(2).getString("Number"));
 
+
+
                 Hotel hotel = new Hotel(hotelID, hotelStar, locality, streetAddress,
-                        singlePrice, singleCount, dualPrice, dualCount, quadPrice, quadCount, 0);
+                        singlePrice, singleCount, dualPrice, dualCount, quadPrice, quadCount, orderCount(context, i));
                 hotels.add(hotel);
             }
 
         } catch (JSONException e) {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
             Log.e("HotelList", "Problem parsing the hotel JSON results", e);
         }
     }

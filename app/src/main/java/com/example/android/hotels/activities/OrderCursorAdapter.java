@@ -27,7 +27,7 @@ public class OrderCursorAdapter extends CursorAdapter {
      * @param context for the activity that called this method
      * @param cursor cursor for the list view
      * @param parent the parent viewgroup
-     * @return
+     * @return a View
      */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {

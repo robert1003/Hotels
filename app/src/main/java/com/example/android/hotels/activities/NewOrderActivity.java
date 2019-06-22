@@ -15,14 +15,10 @@ import android.widget.TextView;
 
 import com.example.android.hotels.R;
 import com.example.android.hotels.Utils;
-import com.example.android.hotels.data.Hotel;
 import com.example.android.hotels.data.HotelList;
-import com.example.android.hotels.data.OrderContract;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class NewOrderActivity extends AppCompatActivity {
     /**
@@ -82,7 +78,7 @@ public class NewOrderActivity extends AppCompatActivity {
         int user_id, hotel_id = max_number_of_hotel, single, dual, quad, total_price = 0;
         String check_in_date = "", check_out_date = "";
 
-
+        /** parse user inputs */
         // try to parse userID
         try {
             user_id = Integer.parseInt(mUser_id.getText().toString());
@@ -90,7 +86,6 @@ public class NewOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_userID_format));
             return;
         }
-
         // try to parse hotelID
         try {
             hotel_id = Integer.parseInt(mHotel_id.getText().toString());
@@ -98,7 +93,6 @@ public class NewOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_hotelID_format));
             return;
         }
-
         // try to parse check_in_date
         try {
             check_in_date = Utils.parseDate(mCheck_in_date.getText().toString());
@@ -106,7 +100,6 @@ public class NewOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_check_in_date_format));
             return;
         }
-
         // try to parse check_out_date
         try {
             check_out_date = Utils.parseDate(mCheck_out_date.getText().toString());
@@ -114,7 +107,6 @@ public class NewOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_check_out_date_format));
             return;
         }
-
         // try to parse number_of_single
         try {
             single = Integer.parseInt(mNumber_of_single.getText().toString());
@@ -122,7 +114,6 @@ public class NewOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_single_format));
             return;
         }
-
         // try to parse number_of_double
         try {
             dual = Integer.parseInt(mNumber_of_dual.getText().toString());
@@ -130,7 +121,6 @@ public class NewOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_dual_format));
             return;
         }
-
         // try to parse number_of_quad
         try {
             quad = Integer.parseInt(mNumber_of_quad.getText().toString());
@@ -139,18 +129,17 @@ public class NewOrderActivity extends AppCompatActivity {
             return;
         }
 
+        /** check validness of input data */
         // check the validness of hotel_id
         if (hotel_id >= max_number_of_hotel) {
             showMessage(getString(R.string.failed_hotel_id));
             return;
         }
-
         // check the validness of two dates (check_in_date < check_out_date)
         if (check_in_date.compareTo(check_out_date) >= 0) {
             showMessage(getString(R.string.invalid_date_range));
             return;
         }
-
         // check if rooms are enough; if enough, calculate the price
         int[] available_rooms_count = Utils.getAvailableRoomInATimeRange(this, hotel_id,
                 check_in_date, check_out_date);
@@ -158,7 +147,7 @@ public class NewOrderActivity extends AppCompatActivity {
                 Integer.toString(available_rooms_count[1]) + " " +
                 Integer.toString(available_rooms_count[2]));
         if(single + dual + quad == 0) {
-            showMessage(getString(R.string.invalid_date_range));
+            showMessage(getString(R.string.invalid_room_numbers));
             return;
         } else if (single <= available_rooms_count[0] && dual <= available_rooms_count[1] &&
                 quad <= available_rooms_count[2]) {

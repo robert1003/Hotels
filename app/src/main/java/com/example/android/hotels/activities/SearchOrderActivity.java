@@ -70,7 +70,6 @@ public class SearchOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_userID_format));
             return;
         }
-
         // try to parse orderID
         try {
             order_id = Integer.parseInt(mOrder_id.getText().toString());

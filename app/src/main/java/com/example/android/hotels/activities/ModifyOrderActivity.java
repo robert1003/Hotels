@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,9 +20,17 @@ import com.example.android.hotels.data.OrderContract;
 import java.text.ParseException;
 
 public class ModifyOrderActivity extends AppCompatActivity {
+    /**
+     * Variable for user inputs
+     */
+    private EditText mUser_id, mOrder_id, mNumber_of_single, mNumber_of_dual, mNumber_of_quad,
+            mCheck_in_date, mCheck_out_date;
 
-    private EditText mUser_id, mOrder_id, mNumber_of_single, mNumber_of_dual, mNumber_of_quad, mCheck_in_date, mCheck_out_date;
-
+    /**
+     * Initialize the screen
+     *
+     * @param savedInstanceState reload saved instance
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_order);
@@ -74,7 +81,6 @@ public class ModifyOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_userID_format));
             return;
         }
-
         // try to parse orderID
         try {
             order_id = Integer.parseInt(mOrder_id.getText().toString());
@@ -82,7 +88,6 @@ public class ModifyOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_orderID_format));
             return;
         }
-
         // try to parse check_in_date
         try {
             check_in_date = Utils.parseDate(mCheck_in_date.getText().toString());
@@ -90,7 +95,6 @@ public class ModifyOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_check_in_date_format));
             return;
         }
-
         // try to parse check_out_date
         try {
             check_out_date = Utils.parseDate(mCheck_out_date.getText().toString());
@@ -98,7 +102,6 @@ public class ModifyOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_check_out_date_format));
             return;
         }
-
         // try to parse number_of_single
         try {
             single = Integer.parseInt(mNumber_of_single.getText().toString());
@@ -106,7 +109,6 @@ public class ModifyOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_single_format));
             return;
         }
-
         // try to parse number_of_double
         try {
             dual = Integer.parseInt(mNumber_of_dual.getText().toString());
@@ -114,7 +116,6 @@ public class ModifyOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.invalid_dual_format));
             return;
         }
-
         // try to parse number_of_quad
         try {
             quad = Integer.parseInt(mNumber_of_quad.getText().toString());
@@ -149,8 +150,8 @@ public class ModifyOrderActivity extends AppCompatActivity {
             return;
         }
 
-        ContentValues values = new ContentValues();
         // assign value to rooms and put them in content
+        ContentValues values = new ContentValues();
         values.put(OrderContract.OrderEntry.COLUMN_NUMBER_OF_SINGLE, single);
         values.put(OrderContract.OrderEntry.COLUMN_NUMBER_OF_DUAL, dual);
         values.put(OrderContract.OrderEntry.COLUMN_NUMBER_OF_QUAD, quad);
@@ -173,13 +174,11 @@ public class ModifyOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.failed_modify_order_room_too_many));
             return;
         }
-
         // date range must be shorter
         if(check_in_date.compareTo(old_check_in_date) < 0 || check_out_date.compareTo(old_check_out_date) > 0){
             showMessage(getString(R.string.failed_modify_order_date_longer));
             return;
         }
-
         // check the validness of two dates (check_in_date < check_out_date)
         if(check_in_date.compareTo(check_out_date) >= 0){
             showMessage(getString(R.string.invalid_date_range));
