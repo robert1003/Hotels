@@ -7,14 +7,9 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/cancel_order"
+        android:id="@+id/search_available"
         style="@style/CategoryStyle"
-        android:text="@string/menu_cancel_order" />
-
-    <TextView
-        android:id="@+id/modify_order"
-        style="@style/CategoryStyle"
-        android:text="@string/menu_modify_order" />
+        android:text="@string/menu_search_available" />
 
     <TextView
         android:id="@+id/new_order"
@@ -22,12 +17,18 @@
         android:text="@string/menu_new_order" />
 
     <TextView
-        android:id="@+id/search_available"
-        style="@style/CategoryStyle"
-        android:text="@string/menu_search_available" />
-    <TextView
         android:id="@+id/search_order"
         style="@style/CategoryStyle"
         android:text="@string/menu_search_order" />
+
+    <TextView
+        android:id="@+id/modify_order"
+        style="@style/CategoryStyle"
+        android:text="@string/menu_modify_order" />
+
+    <TextView
+        android:id="@+id/cancel_order"
+        style="@style/CategoryStyle"
+        android:text="@string/menu_cancel_order" />
 
 </LinearLayout>
