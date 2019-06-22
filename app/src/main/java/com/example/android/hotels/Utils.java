@@ -199,7 +199,7 @@ public class Utils {
      * Check if date is valid
      *
      * @param raw_date the date to check
-     * @return raw_date, for convenience
+     * @return formatted date
      * @throws ParseException if fail, it will throw exception
      */
     public static String parseDate(String raw_date) throws ParseException {

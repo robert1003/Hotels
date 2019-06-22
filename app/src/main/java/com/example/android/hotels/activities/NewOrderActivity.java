@@ -79,8 +79,6 @@ public class NewOrderActivity extends AppCompatActivity {
      * Create new order
      */
     private void newOrder() {
-        boolean ok = true;
-
         int user_id, hotel_id = max_number_of_hotel, single, dual, quad, total_price = 0;
         String check_in_date = "", check_out_date = "";
 
@@ -173,6 +171,9 @@ public class NewOrderActivity extends AppCompatActivity {
             showMessage(getString(R.string.failed_order_room));
             return;
         }
+
+        // update HotelList
+        HotelList.hotels.get(hotel_id).count += 1;
 
         // create new order
         ContentValues values = new ContentValues();

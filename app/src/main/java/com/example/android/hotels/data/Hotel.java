@@ -12,10 +12,11 @@ public class Hotel {
     public int dualCount;
     public int quadPrice;
     public int quadCount;
+    public int count;
 
     // construct a new hotel
     public Hotel(int hotelID, int hotelStar, String locality, String streetAddress, int singlePrice,
-                 int singleCount, int dualPrice, int dualCount, int quadPrice, int quadCount) {
+                 int singleCount, int dualPrice, int dualCount, int quadPrice, int quadCount, int count) {
         this.hotelID = hotelID;
         this.hotelStar = hotelStar;
         this.locality = locality;
@@ -26,6 +27,7 @@ public class Hotel {
         this.dualCount = dualCount;
         this.quadPrice = quadPrice;
         this.quadCount = quadCount;
+        this.count = count;
     }
 
     // checking function of data
@@ -34,6 +36,6 @@ public class Hotel {
         return "" + this.hotelID + " " + this.hotelStar + " " + this.locality + " " +
                 this.streetAddress + " " + this.singlePrice + " " + this.singleCount + " " +
                 this.dualPrice + " " + this.dualCount + " " + this.quadPrice + " " +
-                this.quadCount;
+                this.quadCount + " " + this.count;
     }
 }

@@ -12,7 +12,6 @@ import com.example.android.hotels.R;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
 public class OrderCursorAdapter extends CursorAdapter {
-
     /**
      *
      * @param context for the activity that called this method

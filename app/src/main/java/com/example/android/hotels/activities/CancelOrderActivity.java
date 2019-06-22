@@ -1,6 +1,7 @@
 package com.example.android.hotels.activities;
 
 import android.app.Dialog;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.android.hotels.R;
+import com.example.android.hotels.data.Hotel;
+import com.example.android.hotels.data.HotelList;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
 
 public class CancelOrderActivity extends AppCompatActivity {
@@ -60,7 +63,7 @@ public class CancelOrderActivity extends AppCompatActivity {
      * Cancel order
      */
     private void cancelOrder() {
-        int user_id, order_id;
+        int user_id, order_id, hotel_id;
 
         // try to parse userID
         try {
@@ -78,26 +81,41 @@ public class CancelOrderActivity extends AppCompatActivity {
             return;
         }
 
-        // try to cancel order (erase order from database) here
-        String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND "
+        // find hotelID
+        String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
+        String[] selectionArgs = new String[]{String.valueOf(user_id), String.valueOf(order_id)};
+        String[] projection = {
+                OrderEntry.COLUMN_HOTEL_ID,
+        };
+
+        // the cursor from query
+        Cursor cursor = getContentResolver().query(OrderEntry.CONTENT_URI, projection , whereClause, selectionArgs, null);
+
+        // data doesn't exist
+        if (cursor.getCount() == 0) {
+            showMessage(getString(R.string.failed_cancel_order));
+            return;
+        } else {
+            cursor.moveToFirst();
+            hotel_id = cursor.getInt(0);
+        }
+
+        // cancel order (erase order from database) here
+        whereClause = OrderEntry.COLUMN_USER_ID + " =? AND "
                 + OrderEntry.COLUMN_ORDER_ID + " =?";
-        String[] selectionArgs = new String[] {
+        selectionArgs = new String[] {
                 Integer.toString(user_id),
                 Integer.toString(order_id)
         };
-        int rowsDeleted = getContentResolver().delete(
+        getContentResolver().delete(
                 OrderEntry.CONTENT_URI,
                 whereClause,
                 selectionArgs
         );
 
-        // if no rows deleted, this means that this order doesn't exist
-        if(rowsDeleted != 0) {
-            showMessage(getString(R.string.success_cancel_order));
-            return;
-        } else {
-            showMessage(getString(R.string.failed_cancel_order));
-            return;
-        }
+        // update and show message
+        HotelList.hotels.get(hotel_id).count -= 1;
+        showMessage(getString(R.string.success_cancel_order));
+        return;
     }
 }

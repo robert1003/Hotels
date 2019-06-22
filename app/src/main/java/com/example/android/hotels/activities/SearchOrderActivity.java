@@ -81,9 +81,6 @@ public class SearchOrderActivity extends AppCompatActivity {
             return;
         }
 
-        // check if order is in dataBase
-
-
         // description for query.
         String whereClause = OrderEntry.COLUMN_USER_ID + " =? AND " + OrderEntry.COLUMN_ORDER_ID + " =?";
         String[] selectionArgs = new String[]{String.valueOf(user_id), String.valueOf(order_id)};
@@ -104,10 +101,7 @@ public class SearchOrderActivity extends AppCompatActivity {
         if(cursor.getCount() == 0){
             showMessage(getString(R.string.failed_search_order));
             return;
-        }
-
-        // search order in dataBase
-        else {
+        } else {
             Intent intent = new Intent(SearchOrderActivity.this, SearchListActivity.class);
             intent.putExtra("User_id", Integer.toString(user_id));
             intent.putExtra("Order_id", Integer.toString(order_id));

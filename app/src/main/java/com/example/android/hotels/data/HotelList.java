@@ -57,7 +57,7 @@ public class HotelList {
                 int quadCount = Integer.parseInt(roomArray.getJSONObject(2).getString("Number"));
 
                 Hotel hotel = new Hotel(hotelID, hotelStar, locality, streetAddress,
-                        singlePrice, singleCount, dualPrice, dualCount, quadPrice, quadCount);
+                        singlePrice, singleCount, dualPrice, dualCount, quadPrice, quadCount, 0);
                 hotels.add(hotel);
             }
 
