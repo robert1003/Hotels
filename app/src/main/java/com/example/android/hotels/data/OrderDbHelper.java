@@ -4,8 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.android.hotels.data.OrderContract.OrderEntry;
+
 public class OrderDbHelper extends SQLiteOpenHelper {
-    /** Name of the database file */
+    /**
+     * Name of the database file
+     */
     private static final String DATABASE_NAME = "Order.db";
 
     /**
@@ -21,6 +24,7 @@ public class OrderDbHelper extends SQLiteOpenHelper {
     public OrderDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     /**
      * This is called when the database is created for the first time.
      */
@@ -41,9 +45,11 @@ public class OrderDbHelper extends SQLiteOpenHelper {
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_ORDERS_TABLE);
     }
+
+    /**
+     * Upgrade database
+     */
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        return;
-    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 }
 

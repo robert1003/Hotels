@@ -14,7 +14,9 @@ public final class OrderContract {
         public final static String TABLE_NAME = "orders";
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_ORDERS);
 
-        // variables for database columns
+        /**
+         * Variables for database comlumns
+         */
         public final static String COLUMN_ORDER_ID = _ID;
         public final static String COLUMN_USER_ID = "user_id";
         public final static String COLUMN_HOTEL_ID = "hotel_id";
